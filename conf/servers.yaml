@@ -1,0 +1,53 @@
+####################
+## SERVER COLLECTION 
+#####################
+
+- name: dev1.vm.local
+  box: centos7
+  ip: 192.168.150.101
+  port_forwarding:
+  - vm_port: 80
+    host_port: 50000 
+  - vm_port: 600
+    host_port: 50001 
+  mem: 2048
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh 
+  - provisions/install_apache.sh
+
+- name: dev2.vm.local
+  box: centos7
+  ip: 192.168.150.11
+  port_forwarding:
+  - vm_port: 80
+    host_port: 60000  
+  mem: 2048
+  cpu: 1
+  type: devbox
+  build: yes 
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh 
+  - provisions/install_apache.sh
+
+- name: server1
+  box: centos7
+  port_forwarding:
+  - vm_port: 80
+    host_port: 55000  
+  ip: 192.168.150.110
+  mem: 1024
+  cpu: 1
+  type: webserver
+  build: yes  
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh 
+  - provisions/install_apache.sh
+
+
+

@@ -1,0 +1,19 @@
+$ sudo yum install https://grafanarel.s3.amazonaws.com/builds/grafana-2.0.2-1.x86_64.rpm
+ sudo yum install https://grafanarel.s3.amazonaws.com/builds/grafana-2.0.2-1.x86_64.rpm
+vim /etc/yum.repos.d/grafana.repo
+sudo -u vagrant vim /etc/yum.repos.d/grafana.repo
+ls -l  /etc/yum.repos.d/
+sudo  vim /etc/yum.repos.d/grafana.repo
+sudo yum install grafana
+sudo service grafana-server start
+sudo  vim /etc/yum.repos.d/grafana.repo
+vim /etc/grafana/grafana.ini
+hostname
+vim ~/.bash_history
+exit
+
+
+http://dev1.vm.local:3000/dashboard/new
+
+admin/admin 
+

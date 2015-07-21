@@ -1,0 +1,111 @@
+
+
+vagrant share --ssh
+
+
+
+Structure : 
+
+
+/project
+  /wp
+  /wp-content
+  wp-config.php
+  index.php
+  Puppetfile
+  Vagrantfile
+
+
+
+======== ssh lesss ========
+Host web
+  HostName 127.0.0.1
+  User prodicon
+  Port 2222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/kmahant/workspace/vagrant_getting_started/ssh_keys/id_rsa
+  IdentitiesOnly yes
+  LogLevel FATAL
+
+
+
+
+
+In /etc/hosts:
+
+	33.33.33.20 django
+	33.33.33.30 barebones
+	33.33.33.30 php
+
+In ~/.ssh/config:
+
+	Host django
+    		HostName 33.33.33.20
+    		User vagrant
+    		ForwardAgent yes
+
+
+to point to local box 
+
+  config.vbguest.iso_path = "#{ENV['HOME']}/Downloads/VBoxGuestAdditions.iso"
+
+#  linux : /usr/share/virtualbox/VBoxGuestAdditions.iso
+
+Dynamic and/or Private Ports are those from 49152 through 65535
+
+
+
+config.vm.provider "virtualbox" do |vb|
+    # Display the VirtualBox GUI when booting the machine
+    vb.gui = true
+ 
+    # Customize the amount of memory on the VM:
+    vb.memory = "4096"
+
+    # CPU cores to use
+    vb.customize ["modifyvm", :id, "--cpus", "1"]
+ 
+    # VRAM 
+    vb.customize ["modifyvm", :id, "--vram", "128"]
+
+    # 3D acceleration
+    vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+  end
+
+  # Swap
+  config.vm.provision :shell, inline: "if ! grep -q '^/swapfile' /etc/fstab; then fallocate -l 1G /swapfile && chmod 0600 /swapfile && mkswap /swapfile && swapon /swapfile && echo '/swapfile none swap sw 0 0' >> /etc/fstab; fi"
+  config.vm.provision :shell, inline: "if ! grep '^vm.swappiness' /etc/sysctl.conf; then echo vm.swappiness = 10 >> /etc/sysctl.conf && echo vm.vfs_cache_pressure = 50 >> /etc/sysctl.conf && sysctl -p; fi"
+
+
+  # Bootstrap script
+  config.vm.provision "shell", path: "bootstrap.sh", privileged: true
+
+  # Allow VPN
+  config.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  end
+end
+  config.vm.provision "shell", path: "bootstrap.sh", privileged: true
+
+  # Allow VPN
+  config.vm.provider :virtualbox do |vb|
+      vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  end
+
+##
+##system("
+##    if [ #{ARGV[0]} = 'up' ]; then
+##        echo 'You are doing vagrant up and can execute your script'
+##        vagrant hostmanager
+##    fi
+##")
+##
+##
+  
+##system('vagrant hostmanager')
+##  system('vagrant hostmanager')
+
+# node_config.vm.hostname = node[:hostname] + '.' + domain
+#Vagrant.require_plugin('vagrant-hostmanager')
