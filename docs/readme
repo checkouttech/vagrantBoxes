@@ -109,3 +109,27 @@ end
 
 # node_config.vm.hostname = node[:hostname] + '.' + domain
 #Vagrant.require_plugin('vagrant-hostmanager')
+
+
+
+
+
+Before using this VM download the box here:
+https://docs.google.com/a/rubiconproject.com/uc?id=0By7oxHn1ay5eX1o4aXk0b0YxdmM&export=download
+
+Then add it to Vagrant:
+vagrant box add trp-ubuntu14-gui.box --name=trp-ubuntu14-gui
+
+
+
+
+
+apt-get update -y
+
+apt-get install make -y  
+apt-get install build-essential -y  
+apt-get install openssl -y  
+apt-get install libssl-dev -y  
+apt-get install pkg-config -y
+
+

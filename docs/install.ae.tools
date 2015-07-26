@@ -1,0 +1,13 @@
+#!/bin/bash
+
+apt-get install -y alien
+apt-get install -y cmake
+apt-get install -y subversion
+updatedb  # initialize for `locate`
+
+# create a shell script to save a little typing
+# see for more details: https://wiki.rubiconproject.com/display/~jcrowell@rubiconproject.com/Local+AdEngine
+echo "svn co https://svn.fanops.net/svn/svnroot/qa/trunk/ae_tools/devsetup ~/devsetup" > trp-ae-svn-co.sh
+chmod a+x trp-ae-svn-co.sh
+
+

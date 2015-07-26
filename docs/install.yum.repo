@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# $Id: bootstrap.sh 110394 2015-05-12 18:21:32Z mhudson $
+
+# Vagrantfile runs as root once on box creation --see http://docs.vagrantup.com/v2/getting-started/provisioning.html
+
+# TRP Repo
+echo '# TRP Repos
+[TRP-5-PROD]
+name=TRP-5-PROD
+baseurl=http://yumcache.lab1.fanops.net/repo/TRP-5-PROD
+enabled=1
+priority=99
+gpgcheck=0
+metadata_expire=60
+
+[TRP-5-QA]
+name=TRP-5-QA
+baseurl=http://yumcache.lab1.fanops.net/repo/TRP-5-QA
+enabled=1
+priority=99
+gpgcheck=0
+metadata_expire=60
+' > /etc/yum.repos.d/TRP.repo
+
+# convenience
+yum install -y mlocate vim-enhanced
+echo "set bg=dark t_ti= t_te=" >> /home/vagrant/.vimrc
+rm /home/vagrant/.bash_logout
+
+# create a shell script to save a little typing
+# see for more details: https://wiki.rubiconproject.com/display/~jcrowell@rubiconproject.com/Local+AdEngine
+echo "svn co https://svn.fanops.net/svn/svnroot/qa/trunk/ae_tools/devsetup ~/devsetup" > trp-ae-svn-co.sh
+chmod a+x trp-ae-svn-co.sh
+
+# getting a head start on some RPMs installed by https://svn.fanops.net/svn/svnroot/qa/trunk/ae_tools/devsetup/devsetup.sh
+yum install -y cmake gcc-c++ subversion
+
+# EOF
