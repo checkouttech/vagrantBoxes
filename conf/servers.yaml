@@ -41,6 +41,8 @@
     host_port: 55000 
   - vm_port: 10001
     host_port: 10001 
+  - vm_port: 10080
+    host_port: 10080 
   ip: 192.168.150.110
   mem: 1024
   cpu: 1

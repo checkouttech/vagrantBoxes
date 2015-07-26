@@ -4,4 +4,8 @@
 sudo pip install bottle
 
 # install requests 
- sudo pip install requests
+sudo pip install requests
+
+
+sudo pip install supervisor
+
