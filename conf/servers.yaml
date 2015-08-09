@@ -19,7 +19,7 @@
   - provisions/copy_keys.sh 
   - provisions/install_apache.sh
 
-- name: dev2.vm.local
+- name: jenkins-master.vm.local
   box: centos7
   ip: 192.168.150.11
   port_forwarding:
@@ -33,6 +33,7 @@
   - provisions/create_user_account.sh
   - provisions/copy_keys.sh 
   - provisions/install_apache.sh
+  - provisions/install_jenkins.sh
 
 - name: fakebidder.vm.local
   box: centos7

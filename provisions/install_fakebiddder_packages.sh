@@ -9,3 +9,7 @@ sudo pip install requests
 
 sudo pip install supervisor
 
+
+# to allow access to supervisor UI from host's browwer 
+sudo   echo '0.0.0.0 localhost' >> /etc/hosts
+
