@@ -7,6 +7,6 @@ sudo yum install jenkins
 
 # firewall-cmd --zone=public --add-port=8080/tcp --permanent
 # firewall-cmd --reload
-# sudo /etc/init.d/jenkins restart
-# systemctl restart jenkins.service
+sudo /etc/init.d/jenkins restart
+#systemctl restart jenkins.service
 
