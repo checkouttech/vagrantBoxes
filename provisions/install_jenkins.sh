@@ -10,3 +10,8 @@ sudo yum -y  install jenkins
 sudo /etc/init.d/jenkins restart
 #systemctl restart jenkins.service
 
+
+# Disable firewall 
+sudo systemctl stop firewalld
+
+
