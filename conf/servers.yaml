@@ -55,5 +55,5 @@
   - provisions/install_apache.sh
   - provisions/install_pip.sh
   - provisions/install_fakebiddder_packages.sh
-
+  - provisions/install_memcache.sh
 
