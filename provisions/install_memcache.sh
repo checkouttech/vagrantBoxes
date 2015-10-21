@@ -1,11 +1,9 @@
 
 # to install memcache
 sudo yum -y install memcached
-yum -y install memcached
 
 # to start memcache 
 sudo systemctl restart memcached
-systemctl restart memcached
 
 # Notes
 # memcache conf :  
