@@ -18,6 +18,9 @@ sudo make
 sudo make install
 
 
+# gatling
+sudo -u jenkins  wget  https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/2.1.7/gatling-charts-highcharts-bundle-2.1.7-bundle.zip  .
+sudo -u jenkins  unzip -o gatling-charts-highcharts-bundle-2.1.7-bundle.zip
 
 
 
