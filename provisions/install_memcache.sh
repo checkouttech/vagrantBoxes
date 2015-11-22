@@ -1,6 +1,7 @@
 
 # to install memcache
 sudo yum -y install memcached
+sudo yum install python-memcached
 
 # to start memcache 
 sudo systemctl restart memcached

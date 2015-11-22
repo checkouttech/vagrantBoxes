@@ -34,6 +34,7 @@
   - provisions/copy_keys.sh 
   - provisions/install_apache.sh
   - provisions/install_jenkins.sh
+  - provisions/install_loadtesting_modules.sh
 
 - name: fakebidder.vm.local
   box: centos7
@@ -54,8 +55,11 @@
   - provisions/copy_keys.sh 
   - provisions/install_apache.sh
   - provisions/install_pip.sh
+  - provisions/install_python_modules.sh
+  - provisions/install_tools.sh
   - provisions/install_fakebiddder_packages.sh
   - provisions/install_memcache.sh
+
 
 - name: graphite.vm.local
   box: centos7
