@@ -24,7 +24,7 @@
   ip: 192.168.150.11
   port_forwarding:
   - vm_port: 80
-    host_port: 60000  
+    host_port: 56470  
   mem: 2048
   cpu: 1
   type: devbox
@@ -40,11 +40,7 @@
   box: centos7
   port_forwarding:
   - vm_port: 80
-    host_port: 55000 
-  - vm_port: 10001
-    host_port: 10001 
-  - vm_port: 10080
-    host_port: 10080 
+    host_port: 55101 
   ip: 192.168.150.110
   mem: 1024
   cpu: 1
@@ -81,4 +77,9 @@
   - provisions/install_apache.sh
   - provisions/install_pip.sh
   - provisions/install_memcache.sh
+  - provisions/install_graphite.sh
+
+
+
+
 
