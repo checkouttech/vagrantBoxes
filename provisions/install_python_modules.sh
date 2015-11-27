@@ -12,6 +12,10 @@ sudo pip install supervisor
 
 sudo pip install python-memcached
 
+wget http://cbs.centos.org/kojifiles/packages/python-six/1.9.0/1.el7/noarch/python-six-1.9.0-1.el7.noarch.rpm
+
+sudo yum install -y python-six-1.9.0-1.el7.noarch.rpm
+
 sudo pip install yaml
 
 sudo  pip install pyyaml
