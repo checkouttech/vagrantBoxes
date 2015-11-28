@@ -81,5 +81,20 @@
 
 
 
+- name: sonarqube.vm.local
+  box: centos7
+  ip: 192.168.150.21
+  port_forwarding:
+  - vm_port: 80
+    host_port: 56470  
+  mem: 2048
+  cpu: 1
+  type: devbox
+  build: yes 
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh 
+  - provisions/install_apache.sh
+  - provisions/install_sonarqube.sh
 
 
