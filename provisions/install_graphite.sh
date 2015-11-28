@@ -26,11 +26,14 @@ sudo docker run -d \
   hopsoft/graphite-statsd
 
 
-
 sudo yum install -y https://grafanarel.s3.amazonaws.com/builds/grafana-2.5.0-1.x86_64.rpm
 
+sudo docker restart graphite
 
 sudo service grafana-server start
+
+curl 'http://admin:admin@localhost:3000/api/datasources' -X POST -H 'Content-Type: application/json;charset=UTF-8' --data-binary '{"name":"localGraphite","type":"graphite","url":"http://localhost:81","access":"proxy","isDefault":true,"database":"asd"}'
+
 
 
 #wget http://grafanarel.s3.amazonaws.com/builds/grafana-2.1.0-pre1.x86_64.rpm
@@ -39,7 +42,6 @@ sudo service grafana-server start
 
 
 #curl 'http://admin:admin@192.168.99.100:3000/api/datasources' -X POST -H 'Content-Type: application/json;charset=UTF-8' --data-binary '{"name":"localGraphite","type":"graphite","url":"http://192.168.99.100","access":"proxy","isDefault":true,"database":"asd"}'
-#curl 'http://admin:admin@localhost:3000/api/datasources' -X POST -H 'Content-Type: application/json;charset=UTF-8' --data-binary '{"name":"localGraphite","type":"graphite","url":"http://localhost","access":"proxy","isDefault":true,"database":"asd"}'
 
 
 
