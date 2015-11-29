@@ -32,12 +32,12 @@
   provision:
   - provisions/create_user_account.sh
   - provisions/copy_keys.sh 
+  - provisions/install_tools.sh
   - provisions/install_apache.sh
   - provisions/install_jenkins.sh
   - provisions/restore_jenkins.sh
   - provisions/install_loadtesting_modules.sh
   - provisions/install_sonar_runner.sh
-  - provisions/install_tools.sh
 
 - name: fakebidder.vm.local
   box: centos7

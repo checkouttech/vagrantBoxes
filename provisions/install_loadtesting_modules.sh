@@ -1,12 +1,12 @@
 
 # pylot 
-sudo yum install unzip
+sudo yum install -y unzip
 sudo pip install -U  numpy
 sudo pip install -U  python-dev
-sudo yum install  numpy-1.7.1-10.el7.src.rpm
-sudo yum install numpy
-sudo yum install Matplotlib
-sudo yum install python-matplotlib
+sudo yum install -y numpy-1.7.1-10.el7.src.rpm
+sudo yum install -y numpy
+sudo yum install -y  Matplotlib
+sudo yum install -y python-matplotlib
 
 
 # siege 
