@@ -23,6 +23,37 @@ sudo -u jenkins  wget  https://repo1.maven.org/maven2/io/gatling/highcharts/gatl
 sudo -u jenkins  unzip -o gatling-charts-highcharts-bundle-2.1.7-bundle.zip
 
 
+### gatling ( new )  
+wget  https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/2.1.7/gatling-charts-highcharts-bundle-2.1.7-bundle.zip 
+sudo unzip -o gatling-charts-highcharts-bundle-2.1.7-bundle.zip  -d /opt/
+sudo ln -s /opt/gatling-charts-highcharts-bundle-*/bin/gatling.sh   /opt/gatling.sh
+
+
+# jmeter 
+wget http://mirror.olnevhost.net/pub/apache//jmeter/binaries/apache-jmeter-2.13.zip 
+sudo unzip apache-jmeter*.zip -d /opt/
+sudo ln -s /opt/apache-jmeter*/bin/jmeter.sh  /opt/jmeter.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

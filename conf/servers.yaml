@@ -24,7 +24,7 @@
   ip: 192.168.150.11
   port_forwarding:
   - vm_port: 80
-    host_port: 56470  
+    host_port: 56411  
   mem: 2048
   cpu: 1
   type: devbox
@@ -34,8 +34,10 @@
   - provisions/copy_keys.sh 
   - provisions/install_apache.sh
   - provisions/install_jenkins.sh
+  - provisions/restore_jenkins.sh
   - provisions/install_loadtesting_modules.sh
   - provisions/install_sonar_runner.sh
+  - provisions/install_tools.sh
 
 - name: fakebidder.vm.local
   box: centos7
