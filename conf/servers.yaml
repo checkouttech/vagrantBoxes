@@ -35,6 +35,7 @@
   - provisions/install_apache.sh
   - provisions/install_jenkins.sh
   - provisions/install_loadtesting_modules.sh
+  - provisions/install_sonar_runner.sh
 
 - name: fakebidder.vm.local
   box: centos7
