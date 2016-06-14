@@ -116,7 +116,6 @@
   - provisions/create_user_account.sh
   - provisions/copy_keys.sh 
   - provisions/install_apache.sh
-  #- provisions/install_pip.sh
   - provisions/install_tools.sh
   - provisions/install_jdk.sh
   - provisions/install_zookeeper.sh

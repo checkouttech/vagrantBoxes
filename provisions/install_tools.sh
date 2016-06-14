@@ -9,3 +9,7 @@ sudo yum -y install rpm-build
 
 
 
+
+# Disable firewall
+sudo systemctl stop firewalld
+
