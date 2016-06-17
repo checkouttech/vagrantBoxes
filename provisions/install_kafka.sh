@@ -20,9 +20,15 @@ sudo  tar -zxvf kafka_2.11-0.10.0.0.tgz --strip-components 1  -C /opt/kafka/
 
 # accept message receiving from remote servers 
 export TARGET_KEY=advertised.listeners
-export REPLACEMENT_VALUE=PLAINTEXT:\\/\\/192.168.150.60:9092
+export REPLACEMENT_VALUE=PLAINTEXT:\\/\\/192.168.150.80:9092
 
 sed -c -i "s/#\($TARGET_KEY*=*\).*/\1$REPLACEMENT_VALUE/" /opt/kafka/config/server.properties
+
+# config remote zookeeper 
+export TARGET_KEY=zookeeper.connect
+export REPLACEMENT_VALUE=192.168.150.70:2181
+
+sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"  /opt/kafka/config/server.properties
 
 
 # start kafka and connect to zookeeper

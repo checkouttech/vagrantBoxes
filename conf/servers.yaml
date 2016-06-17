@@ -121,3 +121,38 @@
   - provisions/install_zookeeper.sh
   - provisions/install_kafka.sh
 
+- name: zookeeper.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 80
+    host_port: 55070 
+  ip: 192.168.150.70
+  mem: 256
+  cpu: 1
+  type: devbox
+  build: yes  
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh 
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_zookeeper.sh
+
+- name: kafka-1.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 80
+    host_port: 55080 
+  ip: 192.168.150.80
+  mem: 256
+  cpu: 1
+  type: devbox
+  build: yes  
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh 
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_kafka.sh
