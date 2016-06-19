@@ -32,7 +32,7 @@ export REPLACEMENT_VALUE=PLAINTEXT:\\/\\/192.168.150.80:9092
 
 sudo sed -c -i "s/#\($TARGET_KEY*=*\).*/\1$REPLACEMENT_VALUE/" $KAFKA_CONFIG/server_1.properties
 
-## set advertised.listener
+## set advertised.listener to accept message from remote servers 
 export TARGET_KEY=advertised.listeners
 export REPLACEMENT_VALUE=PLAINTEXT:\\/\\/192.168.150.80:9092
 
@@ -72,7 +72,7 @@ export REPLACEMENT_VALUE=PLAINTEXT:\\/\\/192.168.150.80:9093
 
 sudo sed -c -i "s/#\($TARGET_KEY*=*\).*/\1$REPLACEMENT_VALUE/" $KAFKA_CONFIG/server_2.properties
 
-## set advertised.listener
+## set advertised.listener to accept message from remote servers 
 export TARGET_KEY=advertised.listeners
 export REPLACEMENT_VALUE=PLAINTEXT:\\/\\/192.168.150.80:9093
 
@@ -92,6 +92,17 @@ export REPLACEMENT_VALUE=192.168.150.70:2181
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $KAFKA_CONFIG/server_2.properties
 
 
+####################################################
+#### Restrict Java heap space to avoid overflowing limited free RAM 
+#### Else not all broker will get initialized 
+####################################################
+
+#write to environment file for all future sessions 
+sudo /bin/sh -c 'echo export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M" >> /etc/environment'
+
+#export for the current session before starting kafka cluster 
+export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
+
 
 ####################################################
 ######## start kafka brokers and connect to zookeper
@@ -101,35 +112,7 @@ sudo $KAFKA/kafka-server-start.sh  -daemon  $KAFKA_CONFIG/server_1.properties
 sudo $KAFKA/kafka-server-start.sh  -daemon  $KAFKA_CONFIG/server_2.properties
 
 
-#sudo $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties
-
-# config remote zookeeper 
-#export TARGET_KEY=zookeeper.connect
-#export REPLACEMENT_VALUE=192.168.150.70:2181
-#sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"  /opt/kafka/config/server.properties
-#sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $KAFKA_CONFIG/server_1.properties   $KAFKA_CONFIG/server_2.properties
 
 
-
-#sudo $KAFKA_HOME/bin/kafka-server-start.sh $KAFKA_HOME/config/server.properties
-
-# accept message receiving from remote servers 
-#export TARGET_KEY=advertised.listeners
-#export REPLACEMENT_VALUE=PLAINTEXT:\\/\\/192.168.150.80:9092
-
-#sed -c -i "s/#\($TARGET_KEY*=*\).*/\1$REPLACEMENT_VALUE/" /opt/kafka/config/server.properties
-
-
-
-# start kafka and connect to zookeeper
-#sudo /opt/kafka/bin/kafka-server-start.sh  -daemon  /opt/kafka/config/server.properties
-
-# kafka-server-start.sh ${KAFKA_HOME}/config/server1.properties   
-#  kafka-server-start.sh ${KAFKA_HOME}/config/server2.properties  
-
-
-# create 2 server properties files for 2 brokers 
-#sudo cp $KAFKA_CONFIG/server.properties  $KAFKA_CONFIG/server_1.properties
-#sudo cp $KAFKA_CONFIG/server.properties  $KAFKA_CONFIG/server_2.properties
 
 

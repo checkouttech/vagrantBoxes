@@ -139,13 +139,13 @@
   - provisions/install_jdk.sh
   - provisions/install_zookeeper.sh
 
-- name: kafka-1.vm.local
+- name: kafka.vm.local
   box: centos7
   port_forwarding:
   - vm_port: 80
     host_port: 55080 
   ip: 192.168.150.80
-  mem: 256
+  mem: 512
   cpu: 1
   type: devbox
   build: yes  
