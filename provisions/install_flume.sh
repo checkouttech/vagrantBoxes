@@ -22,6 +22,19 @@ sudo  tar -zxvf apache-flume-1.6.0-bin.tar.gz  --strip-components 1  -C $FLUME_H
 
 
 ####################################################
+############# get libs 
+####################################################
+
+# get zookeeper libs
+wget --quiet https://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.8/zookeeper-3.4.8.jar
+sudo cp zookeeper-3.4.8.jar $FLUME_HOME/lib/
+
+
+
+
+
+
+####################################################
 ############# broker 1 specific settings
 ####################################################
 
@@ -78,9 +91,15 @@ flume1.sinks.k1.type=logger
 flume1.sinks.k1.channel=c1
 
 flume1.sinks.k1.type = file_roll
-flume1.sinks.k1.sink.directory = /tmp/logs/sink
+flume1.sinks.k1.sink.directory = /data/flume_output
 
 ' > $FLUME_CONFIG/kafka2file.conf 
+
+
+# create output directory 
+sudo mkdir -p /data/flume_output
+sudo chown vagrant:vagrant /data/flume_output/
+sudo chmod 755 -R /data/flume_output
 
 
 ####################################################
