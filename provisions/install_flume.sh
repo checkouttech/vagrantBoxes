@@ -102,6 +102,7 @@ sudo chown vagrant:vagrant /data/flume_output/
 sudo chmod 755 -R /data/flume_output
 
 
+
 ####################################################
 #### Restrict Java heap space to avoid overflowing limited free RAM 
 #### Else not all broker will get initialized 
@@ -124,6 +125,7 @@ sudo chmod 755 -R /data/flume_output
 
 #  /opt/flume/bin/flume-ng   agent --name flume1 -c /opt/flume/conf -f /opt/flume/conf/kafka2file.conf   -Dflume.root.logger=INFO,console -Dflume.log.dir=/tmp -Dflume.log.file=flume-agent.log
 
+# /opt/flume/bin/flume-ng   agent --name flume1 -c /opt/flume/conf -f /opt/flume/conf/kafka2file.conf   -Dflume.root.logger=INFO,console -Dflume.log.dir=/tmp -Dflume.log.file=flume-agent.log
 
 ####################################################
 
