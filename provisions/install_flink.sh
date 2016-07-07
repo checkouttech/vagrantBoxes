@@ -24,6 +24,15 @@ sudo  tar -zxvf flink-1.0.3-bin-hadoop27-scala_2.11.tgz  --strip-components 1  -
 ############# config settings
 ####################################################
 
+
+# declare job manager(s) aka. master nodes 
+
+echo 'localhost:8081
+localhost:8082' > $FLINK_CONFIG/masters
+
+
+
+
 # declare task managers aka.  slave nodes 
 # the slaves will be on same physical box 
 
@@ -47,7 +56,31 @@ export REPLACEMENT_VALUE=" 3"
 sudo sed -c -i "s/\($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
 
 # fs.hdfs.hadoopconf
-# recovery.zookeeper.quorum
+
+
+
+# set recovery mode to zookeeper
+export TARGET_KEY=recovery.mode
+export REPLACEMENT_VALUE=" zookeeper"
+sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
+
+
+# set zookeeper server info 
+export TARGET_KEY=recovery.zookeeper.quorum
+export REPLACEMENT_VALUE=" 192.168.150.70:2181"
+sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
+
+
+# set recovery storage directory 
+# TODO : should be in hdfs 
+export TARGET_KEY=recovery.zookeeper.storageDir
+export REPLACEMENT_VALUE=" \\/tmp\\/"
+sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
+
+
+
+
+
 
 ####################################################
 ######## start flink daemon
