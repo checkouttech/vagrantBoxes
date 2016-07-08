@@ -1,5 +1,5 @@
 ####################
-## SERVER COLLECTION 
+## SERVER COLLECTION
 #####################
 
 - name: dev1.vm.local
@@ -7,16 +7,16 @@
   ip: 192.168.150.101
   port_forwarding:
   - vm_port: 80
-    host_port: 50000 
+    host_port: 50000
   - vm_port: 600
-    host_port: 50001 
+    host_port: 50001
   mem: 2048
   cpu: 1
   type: devbox
   build: yes
   provision:
   - provisions/create_user_account.sh
-  - provisions/copy_keys.sh 
+  - provisions/copy_keys.sh
   - provisions/install_apache.sh
 
 - name: jenkins-master.vm.local
@@ -24,14 +24,14 @@
   ip: 192.168.150.11
   port_forwarding:
   - vm_port: 80
-    host_port: 56411  
+    host_port: 56411
   mem: 2048
   cpu: 1
   type: devbox
-  build: yes 
+  build: yes
   provision:
   - provisions/create_user_account.sh
-  - provisions/copy_keys.sh 
+  - provisions/copy_keys.sh
   - provisions/install_tools.sh
   - provisions/install_pip.sh
   - provisions/install_apache.sh
@@ -44,15 +44,15 @@
   box: centos7
   port_forwarding:
   - vm_port: 80
-    host_port: 55101 
+    host_port: 55101
   ip: 192.168.150.110
   mem: 1024
   cpu: 1
   type: webserver
-  build: yes  
+  build: yes
   provision:
   - provisions/create_user_account.sh
-  - provisions/copy_keys.sh 
+  - provisions/copy_keys.sh
   - provisions/install_apache.sh
   - provisions/install_pip.sh
   - provisions/install_python_modules.sh
@@ -65,19 +65,19 @@
   box: centos7
   port_forwarding:
   - vm_port: 80
-    host_port: 54000 
+    host_port: 54000
   - vm_port: 10004
-    host_port: 10004 
+    host_port: 10004
   - vm_port: 10040
-    host_port: 10040 
+    host_port: 10040
   ip: 192.168.150.104
   mem: 1024
   cpu: 1
   type: webserver
-  build: yes  
+  build: yes
   provision:
   - provisions/create_user_account.sh
-  - provisions/copy_keys.sh 
+  - provisions/copy_keys.sh
   - provisions/install_apache.sh
   - provisions/install_pip.sh
   - provisions/install_memcache.sh
@@ -90,14 +90,14 @@
   ip: 192.168.150.21
   port_forwarding:
   - vm_port: 80
-    host_port: 56470  
+    host_port: 56470 
   mem: 2048
   cpu: 1
   type: devbox
-  build: yes 
+  build: yes
   provision:
   - provisions/create_user_account.sh
-  - provisions/copy_keys.sh 
+  - provisions/copy_keys.sh
   - provisions/install_apache.sh
   - provisions/install_sonarqube.sh
 
@@ -106,15 +106,15 @@
   box: centos7
   port_forwarding:
   - vm_port: 80
-    host_port: 55060 
+    host_port: 55060
   ip: 192.168.150.60
   mem: 1024
   cpu: 1
   type: devbox
-  build: yes  
+  build: yes
   provision:
   - provisions/create_user_account.sh
-  - provisions/copy_keys.sh 
+  - provisions/copy_keys.sh
   - provisions/install_apache.sh
   - provisions/install_tools.sh
   - provisions/install_jdk.sh
@@ -125,15 +125,15 @@
   box: centos7
   port_forwarding:
   - vm_port: 80
-    host_port: 55070 
+    host_port: 55070
   ip: 192.168.150.70
   mem: 256
   cpu: 1
   type: devbox
-  build: yes  
+  build: yes
   provision:
   - provisions/create_user_account.sh
-  - provisions/copy_keys.sh 
+  - provisions/copy_keys.sh
   - provisions/install_apache.sh
   - provisions/install_tools.sh
   - provisions/install_jdk.sh
@@ -143,15 +143,15 @@
   box: centos7
   port_forwarding:
   - vm_port: 80
-    host_port: 55080 
+    host_port: 55080
   ip: 192.168.150.80
   mem: 512
   cpu: 1
   type: devbox
-  build: yes  
+  build: yes
   provision:
   - provisions/create_user_account.sh
-  - provisions/copy_keys.sh 
+  - provisions/copy_keys.sh
   - provisions/install_apache.sh
   - provisions/install_tools.sh
   - provisions/install_jdk.sh
@@ -162,15 +162,15 @@
   box: centos7
   port_forwarding:
   - vm_port: 90
-    host_port: 55090 
+    host_port: 55090
   ip: 192.168.150.90
   mem: 256
   cpu: 1
   type: devbox
-  build: yes  
+  build: yes
   provision:
   - provisions/create_user_account.sh
-  - provisions/copy_keys.sh 
+  - provisions/copy_keys.sh
   - provisions/install_apache.sh
   - provisions/install_tools.sh
   - provisions/install_jdk.sh
@@ -182,15 +182,15 @@
   box: centos7
   port_forwarding:
   - vm_port: 100
-    host_port: 55100 
+    host_port: 55100
   ip: 192.168.150.100
   mem: 256
   cpu: 1
   type: devbox
-  build: yes  
+  build: yes
   provision:
   - provisions/create_user_account.sh
-  - provisions/copy_keys.sh 
+  - provisions/copy_keys.sh
   - provisions/install_apache.sh
   - provisions/install_tools.sh
   - provisions/install_jdk.sh
@@ -198,4 +198,22 @@
   - provisions/install_scala.sh
 
 
+
+- name: druid.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 110
+    host_port: 55110
+  ip: 192.168.150.110
+  mem: 512
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_druid.sh
 
