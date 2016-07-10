@@ -217,3 +217,61 @@
   - provisions/install_jdk.sh
   - provisions/install_druid.sh
 
+
+- name: hadoop-master.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 15
+    host_port: 55015
+  ip: 192.168.1.15
+  mem: 512
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_hadoop.sh
+
+
+- name: hadoop-slave-1.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 16
+    host_port: 55016
+  ip: 192.168.1.16
+  mem: 512
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_hadoop.sh
+
+
+- name: hadoop-slave-2.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 17
+    host_port: 55017
+  ip: 192.168.1.17
+  mem: 512
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_hadoop.sh
+
+
