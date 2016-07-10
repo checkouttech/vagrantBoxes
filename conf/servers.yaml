@@ -205,7 +205,7 @@
   - vm_port: 110
     host_port: 55110
   ip: 192.168.150.110
-  mem: 512
+  mem: 2048
   cpu: 1
   type: devbox
   build: yes
