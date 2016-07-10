@@ -74,7 +74,38 @@ sudo chmod 755 -R /data/druid_output
 
 #$DRUID/init
 
+####################################################################################################
+####################################################################################################
+####################################################################################################
 
+# download tranquility
+wget --quiet http://static.druid.io/tranquility/releases/tranquility-distribution-0.8.0.tgz
+
+export TRANQUILITY_HOME=/opt/tranquility/
+export TRANQUILITY=$TRANQUILITY_HOME/bin
+export TRANQUILITY_CONFIG=$TRANQUILITY_HOME/conf
+
+
+#write to environment file for all future sessions
+sudo /bin/sh -c 'echo export TRANQUILITY_HOME="/opt/tranquility/" >> /etc/environment'
+sudo /bin/sh -c 'echo export TRANQUILITY="$TRANQUILITY_HOME/bin" >> /etc/environment'
+sudo /bin/sh -c 'echo export TRANQUILITY_CONFIG="$TRANQUILITY_HOME/conf" >> /etc/environment'
+
+
+#sudo mkdir /opt/tranquility
+sudo mkdir $TRANQUILITY_HOME
+
+sudo  tar -zxvf tranquility-distribution-0.8.0.tgz  --strip-components 1  -C $TRANQUILITY_HOME
+
+####################################################
+############# config settings
+####################################################
+
+# set remote zookeeper for tranquility
+export TARGET_KEY=zookeeper.connect
+export REPLACEMENT_VALUE=192.168.150.70:2181
+sudo sed -c -i "s/\($TARGET_KEY*\:\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/tranquility/server.json
+sudo sed -c -i "s/\($TARGET_KEY*\:\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/tranquility/server.json
 
 ####################################################
 ############# example 
