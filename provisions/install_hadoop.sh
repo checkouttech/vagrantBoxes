@@ -27,13 +27,25 @@ sudo  tar -zxvf hadoop-2.7.2.tar.gz  --strip-components 1  -C $HADOOP_HOME
 ############# user settings
 ####################################################
 
-# create hadoop user 
+## create hadoop user
 sudo useradd hadoop
 
-# set password to hadoop 
+## set password to hadoop
 echo hadoop | sudo passwd --stdin  hadoop
 
-## give permission to entire hadoop setup directory 
+
+## run passwordless  key-gen and save to hadoop user
+sudo -u hadoop ssh-keygen -t rsa -N ""  -f /home/hadoop/.ssh/id_rsa  -q
+
+## share public keys with remote boxes
+## TODO : how to run this step without prompting for password "hadoop"
+#sudo  -u hadoop ssh-copy-id -i  /home/hadoop/.ssh/id_rsa.pub -o StrictHostKeyChecking=no  hadoop@hadoop-master.vm.local
+#sudo  -u hadoop ssh-copy-id -i  /home/hadoop/.ssh/id_rsa.pub -o StrictHostKeyChecking=no  hadoop@hadoop-slave-1.vm.local
+
+#sudo -u hadoop chmod 0600 ~/.ssh/authorized_keys
+
+
+## give permission to entire hadoop setup directory
 sudo chown -R hadoop:hadoop $HADOOP_HOME
 sudo chmod 755 -R $HADOOP_HOME
 
@@ -52,22 +64,21 @@ sudo echo '192.168.1.15  hadoop-master.vm.local
 ############# config settings
 ####################################################
 
-# declare master / namenode 
+# declare master / namenode
 sudo echo '
 hadoop-master.vm.local
 ' > $HADOOP_CONF_DIR/masters
 
 
-# declare slaves / datanodes 
+# declare slaves / datanodes
 sudo echo '
 hadoop-slave-1.vm.local
 ' > $HADOOP_CONF_DIR/slaves
 
 
-# write core-site.xml 
+# write core-site.xml
 
-sudo echo '
-<?xml version="1.0" encoding="UTF-8"?>
+sudo echo '<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <!-- Put site-specific property overrides in this file. -->
@@ -86,10 +97,9 @@ sudo echo '
 ' > $HADOOP_CONF_DIR/core-site.xml
 
 
-# write hdfs-site.xml 
+# write hdfs-site.xml
 
-sudo echo '
-<?xml version="1.0" encoding="UTF-8"?>
+sudo echo '<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <!-- Put site-specific property overrides in this file. -->
@@ -117,10 +127,9 @@ sudo echo '
 ' > $HADOOP_CONF_DIR/hdfs-site.xml
 
 
-# write mapred-site.xml 
+# write mapred-site.xml
 
-sudo echo '
-<?xml version="1.0" encoding="UTF-8"?>
+sudo echo '<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 
 <!-- Put site-specific property overrides in this file. -->
@@ -139,14 +148,40 @@ sudo echo '
 
 
 
-export HADOOP_OPTS=-Djava.net.preferIPv4Stack=true 
+export HADOOP_OPTS=-Djava.net.preferIPv4Stack=true
 sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /etc/environment'
+
+
+#####################################################
+######### start hadoop
+#####################################################
+
+## Master - create namenode
+#/opt/hadoop/bin/hadoop namenode -format
+
+
+
+## Start dfs service
+# /opt/hadoop/sbin/start-all.sh
+# /opt/hadoop/sbin/start-dfs.sh
+
+
+## Check dfs
+# /opt/hadoop/bin/hdfs dfs -ls /
+
+## Stop dfs service
+# /opt/hadoop/sbin/stop-all.sh
+#
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
 
 
 
 
 #
-## declare job manager(s) aka. master nodes 
+## declare job manager(s) aka. master nodes
 #
 #echo 'localhost:8081
 #localhost:8082' > $FLINK_CONFIG/masters
@@ -154,8 +189,8 @@ sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /e
 #
 #
 #
-## declare task managers aka.  slave nodes 
-## the slaves will be on same physical box 
+## declare task managers aka.  slave nodes
+## the slaves will be on same physical box
 #
 #echo 'localhost
 #localhost' > $FLINK_CONFIG/slaves
@@ -163,18 +198,18 @@ sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /e
 #
 ## set flink-conf.yaml
 #
-### set log directory 
+### set log directory
 #export TARGET_KEY=taskmanager.tmp.dirs
 #export REPLACEMENT_VALUE=" \\/tmp\\/flink-temp"
 #
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
+#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
 #
 #
-### set tasks slots per slave/taskmanager 
+### set tasks slots per slave/taskmanager
 #export TARGET_KEY=taskmanager.numberOfTaskSlots
 #export REPLACEMENT_VALUE=" 3"
 #
-#sudo sed -c -i "s/\($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
+#sudo sed -c -i "s/\($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
 #
 ## fs.hdfs.hadoopconf
 #
@@ -183,20 +218,20 @@ sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /e
 ## set recovery mode to zookeeper
 #export TARGET_KEY=recovery.mode
 #export REPLACEMENT_VALUE=" zookeeper"
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
+#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
 #
 #
-## set zookeeper server info 
+## set zookeeper server info
 #export TARGET_KEY=recovery.zookeeper.quorum
 #export REPLACEMENT_VALUE=" 192.168.150.70:2181"
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
+#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
 #
 #
-## set recovery storage directory 
-## TODO : should be in hdfs 
+## set recovery storage directory
+## TODO : should be in hdfs
 #export TARGET_KEY=recovery.zookeeper.storageDir
 #export REPLACEMENT_VALUE=" \\/tmp\\/"
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
+#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
 #
 #
 #
@@ -207,9 +242,9 @@ sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /e
 ######### start flink daemon
 #####################################################
 #
-## create log directory 
-## give permission to logger's log directory 
-## TODO : see if this can be changed to a different location 
+## create log directory
+## give permission to logger's log directory
+## TODO : see if this can be changed to a different location
 #
 ## mkdir /opt/flink/log
 #sudo chown vagrant:vagrant /opt/flink/log/
@@ -221,7 +256,7 @@ sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /e
 #sudo chmod 755 -R /data/flink_output
 #
 #
-## create temp directory 
+## create temp directory
 #mkdir /tmp/flink-temp
 #sudo chown vagrant:vagrant /tmp/flink-temp
 #
@@ -237,7 +272,7 @@ sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /e
 #
 #
 #####################################################
-############## example 
+############## example
 #####################################################
 #
 ##sudo /opt/flink/bin/flink  run  /opt/flink/examples/streaming/Kafka.jar   --topic my-topic3  --bootstrap.servers 192.168.150.80:9092   --group.id  abc   --zookeeper.connect  192.168.150.70:2181
@@ -250,14 +285,14 @@ sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /e
 #
 
 ####################################################
-#### Restrict Java heap space to avoid overflowing limited free RAM 
-#### Else not all broker will get initialized 
+#### Restrict Java heap space to avoid overflowing limited free RAM
+#### Else not all broker will get initialized
 ####################################################
 
-#write to environment file for all future sessions 
+#write to environment file for all future sessions
 #sudo /bin/sh -c 'echo export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M" >> /etc/environment'
 
-#export for the current session before starting kafka cluster 
+#export for the current session before starting kafka cluster
 #export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
 
 
