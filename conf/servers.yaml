@@ -221,9 +221,9 @@
 - name: hadoop-master.vm.local
   box: centos7
   port_forwarding:
-  - vm_port: 15
-    host_port: 55015
-  ip: 192.168.1.15
+  - vm_port: 120
+    host_port: 55120
+  ip: 192.168.150.120
   mem: 512
   cpu: 1
   type: devbox
@@ -240,9 +240,9 @@
 - name: hadoop-slave-1.vm.local
   box: centos7
   port_forwarding:
-  - vm_port: 16
-    host_port: 55016
-  ip: 192.168.1.16
+  - vm_port: 121
+    host_port: 55121
+  ip: 192.168.150.121
   mem: 512
   cpu: 1
   type: devbox
@@ -259,9 +259,9 @@
 - name: hadoop-slave-2.vm.local
   box: centos7
   port_forwarding:
-  - vm_port: 17
-    host_port: 55017
-  ip: 192.168.1.17
+  - vm_port: 122
+    host_port: 55122
+  ip: 192.168.150.122
   mem: 512
   cpu: 1
   type: devbox
