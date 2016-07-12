@@ -61,8 +61,8 @@ sudo echo '192.168.150.120  hadoop-master.vm.local
 
 
 
-# NOTE : Very very important for master to listen on hostname:9000 channel 
-# to be run only on hadoop master 
+# NOTE : Very very important for master to listen on hostname:9000 channel
+# to be run only on hadoop master
 
 THISHOST=$(hostname)
 
@@ -168,25 +168,42 @@ sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /e
 
 
 #####################################################
-######### start hadoop
+######### start hadoop - Manual steps
 #####################################################
+
+
+## Change user to hadoop
+# su - hadoop
 
 ## Master - create namenode
 #/opt/hadoop/bin/hadoop namenode -format
-
-
 
 ## Start dfs service
 # /opt/hadoop/sbin/start-all.sh
 # /opt/hadoop/sbin/start-dfs.sh
 
-
 ## Check dfs
 # /opt/hadoop/bin/hdfs dfs -ls /
 
+## create tmp directory in dfs
+# /opt/hadoop/bin/hadoop fs -mkdir /tmp/
+
+## change mode
+#/opt/hadoop/bin/hadoop fs -chmod 0777 /tmp
+
 ## Stop dfs service
 # /opt/hadoop/sbin/stop-all.sh
-#
+# /opt/hadoop/sbin/stop-dfs.sh
+
+
+
+
+
+
+
+
+
+
 
 ####################################################################################################
 ####################################################################################################
