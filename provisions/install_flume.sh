@@ -138,6 +138,16 @@ sudo chown vagrant:vagrant /data/flume_output/
 sudo chmod 755 -R /data/flume_output
 
 
+####################################################
+######## start flume daemon
+####################################################
+
+
+# /opt/flume/bin/flume-ng   agent --name flume1 -c /opt/flume/conf -f /opt/flume/conf/kafka2file.conf   -Dflume.root.logger=INFO,console -Dflume.log.dir=/tmp -Dflume.log.file=flume-agent.log
+
+# /opt/flume/bin/flume-ng   agent --name flume1 -c /opt/flume/conf -f /opt/flume/conf/kafka2hdfs.conf   -Dflume.root.logger=INFO,console -Dflume.log.dir=/tmp -Dflume.log.file=flume-agent.log
+
+
 
 ####################################################
 #### Restrict Java heap space to avoid overflowing limited free RAM 
@@ -150,53 +160,5 @@ sudo chmod 755 -R /data/flume_output
 #export for the current session before starting kafka cluster 
 #export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
 
-
-
-####################################################
-######## start flume daemon
-####################################################
-
-#sudo $KAFKA/kafka-server-start.sh  -daemon  $KAFKA_CONFIG/server_1.properties
-#sudo $KAFKA/kafka-server-start.sh  -daemon  $KAFKA_CONFIG/server_2.properties
-
-#  /opt/flume/bin/flume-ng   agent --name flume1 -c /opt/flume/conf -f /opt/flume/conf/kafka2file.conf   -Dflume.root.logger=INFO,console -Dflume.log.dir=/tmp -Dflume.log.file=flume-agent.log
-
-# /opt/flume/bin/flume-ng   agent --name flume1 -c /opt/flume/conf -f /opt/flume/conf/kafka2file.conf   -Dflume.root.logger=INFO,console -Dflume.log.dir=/tmp -Dflume.log.file=flume-agent.log
-
-####################################################
-
-### copy standard issued server properties file as template for broker 1  
-#sudo cp $KAFKA_CONFIG/server.properties  $KAFKA_CONFIG/server_1.properties
-#
-### set broker ID
-#export TARGET_KEY=broker.id
-#export REPLACEMENT_VALUE=1
-#
-#sudo sed -c -i "s/\($TARGET_KEY*=*\).*/\1$REPLACEMENT_VALUE/" $KAFKA_CONFIG/server_1.properties
-#
-### set listerner
-#export TARGET_KEY=listeners
-#export REPLACEMENT_VALUE=PLAINTEXT:\\/\\/192.168.150.80:9092
-#
-#sudo sed -c -i "s/#\($TARGET_KEY*=*\).*/\1$REPLACEMENT_VALUE/" $KAFKA_CONFIG/server_1.properties
-#
-### set advertised.listener to accept message from remote servers 
-#export TARGET_KEY=advertised.listeners
-#export REPLACEMENT_VALUE=PLAINTEXT:\\/\\/192.168.150.80:9092
-#
-#sed -c -i "s/#\($TARGET_KEY*=*\).*/\1$REPLACEMENT_VALUE/" $KAFKA_CONFIG/server_1.properties
-#
-#
-### set log directory
-#export TARGET_KEY=log.dirs
-#export REPLACEMENT_VALUE=\\/tmp\\/broker1\\/log
-#
-#sudo sed -c -i "s/\($TARGET_KEY*=*\).*/\1$REPLACEMENT_VALUE/" $KAFKA_CONFIG/server_1.properties
-#
-## set remote zookeeper
-#export TARGET_KEY=zookeeper.connect
-#export REPLACEMENT_VALUE=192.168.150.70:2181
-#sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $KAFKA_CONFIG/server_1.properties
-#
 
 
