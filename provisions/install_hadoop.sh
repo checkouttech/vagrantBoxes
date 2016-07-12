@@ -55,9 +55,9 @@ sudo chmod 755 -R $HADOOP_HOME
 ############# env settings
 ####################################################
 
-sudo echo '192.168.1.15  hadoop-master.vm.local
-192.168.1.16  hadoop-slave-1.vm.local
-192.168.1.17  hadoop-slave-2.vm.local' > /etc/hosts
+sudo echo '192.168.150.120  hadoop-master.vm.local
+192.168.150.121  hadoop-slave-1.vm.local
+192.168.150.122  hadoop-slave-2.vm.local' >> /etc/hosts
 
 
 ####################################################
