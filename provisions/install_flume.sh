@@ -43,17 +43,17 @@ sudo cp  commons-httpclient-3.1.jar $FLUME_HOME/lib/
 wget --quiet http://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4.jar
 sudo cp commons-io-2.4.jar $FLUME_HOME/lib/
 
-# hadoop-auth-2.7.2.jar
+# hadoop-auth-2.7.1.jar
 wget --quiet http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/2.7.1/hadoop-auth-2.7.1.jar
-sudo cp  hadoop-auth-2.7.2.jar $FLUME_HOME/lib/
+sudo cp  hadoop-auth-2.7.1.jar $FLUME_HOME/lib/
 
 # hadoop-common-2.7.2.jar
 wget --quiet http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/2.7.1/hadoop-common-2.7.1.jar
 sudo cp  hadoop-common-2.7.1.jar $FLUME_HOME/lib/
 
-# hadoop-hdfs-2.7.2.jar 
+# hadoop-hdfs-2.7.1.jar
 wget --quiet http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs/2.7.1/hadoop-hdfs-2.7.1.jar
-sudo cp  hadoop-hdfs-2.7.2.jar $FLUME_HOME/lib/
+sudo cp  hadoop-hdfs-2.7.1.jar $FLUME_HOME/lib/
 
 # hadoop-nfs-2.7.1.jar
 wget --quiet http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-nfs/2.7.1/hadoop-nfs-2.7.1.jar
