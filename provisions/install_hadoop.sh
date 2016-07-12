@@ -172,6 +172,7 @@ sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /e
 #####################################################
 
 
+#
 ## Change user to hadoop
 # su - hadoop
 
@@ -196,125 +197,9 @@ sudo /bin/sh -c 'echo export HADOOP_OPTS="-Djava.net.preferIPv4Stack=true" >> /e
 # /opt/hadoop/sbin/stop-dfs.sh
 
 
-
-
-
-
-
-
-
-
-
 ####################################################################################################
 ####################################################################################################
 ####################################################################################################
-
-
-
-
-#
-## declare job manager(s) aka. master nodes
-#
-#echo 'localhost:8081
-#localhost:8082' > $FLINK_CONFIG/masters
-#
-#
-#
-#
-## declare task managers aka.  slave nodes
-## the slaves will be on same physical box
-#
-#echo 'localhost
-#localhost' > $FLINK_CONFIG/slaves
-#
-#
-## set flink-conf.yaml
-#
-### set log directory
-#export TARGET_KEY=taskmanager.tmp.dirs
-#export REPLACEMENT_VALUE=" \\/tmp\\/flink-temp"
-#
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
-#
-#
-### set tasks slots per slave/taskmanager
-#export TARGET_KEY=taskmanager.numberOfTaskSlots
-#export REPLACEMENT_VALUE=" 3"
-#
-#sudo sed -c -i "s/\($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
-#
-## fs.hdfs.hadoopconf
-#
-#
-#
-## set recovery mode to zookeeper
-#export TARGET_KEY=recovery.mode
-#export REPLACEMENT_VALUE=" zookeeper"
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
-#
-#
-## set zookeeper server info
-#export TARGET_KEY=recovery.zookeeper.quorum
-#export REPLACEMENT_VALUE=" 192.168.150.70:2181"
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
-#
-#
-## set recovery storage directory
-## TODO : should be in hdfs
-#export TARGET_KEY=recovery.zookeeper.storageDir
-#export REPLACEMENT_VALUE=" \\/tmp\\/"
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
-#
-#
-#
-#
-#
-#
-#####################################################
-######### start flink daemon
-#####################################################
-#
-## create log directory
-## give permission to logger's log directory
-## TODO : see if this can be changed to a different location
-#
-## mkdir /opt/flink/log
-#sudo chown vagrant:vagrant /opt/flink/log/
-#sudo chmod -R 755 /opt/flink/log/
-#
-## create output directory
-#sudo mkdir -p /data/flink_output
-#sudo chown vagrant:vagrant /data/flink_output/
-#sudo chmod 755 -R /data/flink_output
-#
-#
-## create temp directory
-#mkdir /tmp/flink-temp
-#sudo chown vagrant:vagrant /tmp/flink-temp
-#
-#
-#
-#
-#####################################################
-######### start flink daemon
-#####################################################
-#
-## sudo $FLINK/start-local.sh
-#sudo $FLINK/start-cluster.sh
-#
-#
-#####################################################
-############## example
-#####################################################
-#
-##sudo /opt/flink/bin/flink  run  /opt/flink/examples/streaming/Kafka.jar   --topic my-topic3  --bootstrap.servers 192.168.150.80:9092   --group.id  abc   --zookeeper.connect  192.168.150.70:2181
-##tail -f /opt/flink/log//flink-*-jobmanager-*.out
-#
-##  /opt/flink/bin/flink run  /opt/flink/examples/batch/WordCount.jar
-#
-#
-#
-#
 
 ####################################################
 #### Restrict Java heap space to avoid overflowing limited free RAM
