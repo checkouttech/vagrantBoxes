@@ -29,10 +29,43 @@ sudo  tar -zxvf apache-flume-1.6.0-bin.tar.gz  --strip-components 1  -C $FLUME_H
 wget --quiet https://repo1.maven.org/maven2/org/apache/zookeeper/zookeeper/3.4.8/zookeeper-3.4.8.jar
 sudo cp zookeeper-3.4.8.jar $FLUME_HOME/lib/
 
+# TODO : replace following hdfs jars with hadoop client 
 
+# commons-configuration-1.6.jar
+wget --quiet http://repo1.maven.org/maven2/commons-configuration/commons-configuration/1.6/commons-configuration-1.6.jar
+sudo cp commons-configuration-1.6.jar $FLUME_HOME/lib/
 
+# commons-httpclient-3.1.jar
+wget --quiet http://repo1.maven.org/maven2/commons-httpclient/commons-httpclient/3.1/commons-httpclient-3.1.jar
+sudo cp  commons-httpclient-3.1.jar $FLUME_HOME/lib/
 
+# commons-io-2.4.jar  
+wget --quiet http://repo1.maven.org/maven2/commons-io/commons-io/2.4/commons-io-2.4.jar
+sudo cp commons-io-2.4.jar $FLUME_HOME/lib/
 
+# hadoop-auth-2.7.2.jar
+wget --quiet http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-auth/2.7.1/hadoop-auth-2.7.1.jar
+sudo cp  hadoop-auth-2.7.2.jar $FLUME_HOME/lib/
+
+# hadoop-common-2.7.2.jar
+wget --quiet http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-common/2.7.1/hadoop-common-2.7.1.jar
+sudo cp  hadoop-common-2.7.1.jar $FLUME_HOME/lib/
+
+# hadoop-hdfs-2.7.2.jar 
+wget --quiet http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-hdfs/2.7.1/hadoop-hdfs-2.7.1.jar
+sudo cp  hadoop-hdfs-2.7.2.jar $FLUME_HOME/lib/
+
+# hadoop-nfs-2.7.1.jar
+wget --quiet http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-nfs/2.7.1/hadoop-nfs-2.7.1.jar
+sudo cp  hadoop-nfs-2.7.1.jar $FLUME_HOME/lib/
+
+# htrace-core-3.1.0-incubating.jar
+wget --quiet http://repo1.maven.org/maven2/org/apache/htrace/htrace-core/3.1.0-incubating/htrace-core-3.1.0-incubating.jar 
+sudo cp  htrace-core-3.1.0-incubating.jar $FLUME_HOME/lib/
+
+# jets3t-0.9.0.jar
+wget --quiet http://repo1.maven.org/maven2/net/java/dev/jets3t/jets3t/0.9.0/jets3t-0.9.0.jar
+sudo cp jets3t-0.9.0.jar $FLUME_HOME/lib/
 
 ####################################################
 ############# broker 1 specific settings
@@ -57,18 +90,21 @@ flume1.channels.hdfs-channel-1.type = memory
 flume1.channels.hdfs-channel-1.capacity = 10000
 flume1.channels.hdfs-channel-1.transactionCapacity = 1000
 
+# Define a sink that outputs to hdfs.
 
 flume1.sinks.hdfs-sink-1.channel = hdfs-channel-1
 flume1.sinks.hdfs-sink-1.type = hdfs
-flume1.sinks.hdfs-sink-1.hdfs.writeFormat = Text
+flume1.sinks.hdfs-sink-1.hdfs.path =  hdfs://192.168.150.120:9000/tmp
 flume1.sinks.hdfs-sink-1.hdfs.fileType = DataStream
+
+flume1.sinks.hdfs-sink-1.hdfs.writeFormat = Text
 flume1.sinks.hdfs-sink-1.hdfs.filePrefix = test-events
 flume1.sinks.hdfs-sink-1.hdfs.useLocalTimeStamp = true
-flume1.sinks.hdfs-sink-1.hdfs.path = /tmp/kafka/%{topic}/%y-%m-%d
-flume1.sinks.hdfs-sink-1.hdfs.path =  hdfs://192.168.150.60:9000//user/hadoop
 flume1.sinks.hdfs-sink-1.hdfs.rollCount=100
 flume1.sinks.hdfs-sink-1.hdfs.rollSize=0
 
+
+#flume1.sinks.hdfs-sink-1.hdfs.path = /tmp/kafka/%{topic}/%y-%m-%d
 ' > $FLUME_CONFIG/kafka2hdfs.conf 
 
 
