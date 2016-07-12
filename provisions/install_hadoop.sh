@@ -60,6 +60,21 @@ sudo echo '192.168.150.120  hadoop-master.vm.local
 192.168.150.122  hadoop-slave-2.vm.local' >> /etc/hosts
 
 
+
+# NOTE : Very very important for master to listen on hostname:9000 channel 
+# to be run only on hadoop master 
+
+THISHOST=$(hostname)
+
+if [ $THISHOST = "hadoop-master.vm.local" ]
+then
+   echo "will run command "
+   sudo sed -c -i "s/\(127.0.1.1 .*\)/#\1/" /etc/hosts
+fi
+
+
+
+
 ####################################################
 ############# config settings
 ####################################################
