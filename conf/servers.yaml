@@ -275,3 +275,23 @@
   - provisions/install_hadoop.sh
 
 
+- name: spark-cluster.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 130
+    host_port: 55130
+  ip: 192.168.150.130
+  mem: 256
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_spark.sh
+  - provisions/install_scala.sh
+
+
