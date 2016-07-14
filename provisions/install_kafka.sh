@@ -124,15 +124,36 @@ sudo $KAFKA/kafka-server-start.sh  -daemon  $KAFKA_CONFIG/server_2.properties
 
 
 # create topic
-#
-#     # /opt/kafka/bin/kafka-topics.sh --create --zookeeper  192.168.150.70:2181  --replication-factor 2 --partitions 2 --topic  my-topic3
-#
+#    /opt/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+#    /opt/kafka/bin/kafka-topics.sh --create --zookeeper  192.168.150.70:2181  --replication-factor 2 --partitions 2 --topic  my-topic3
+
 # built in producer
-#
-#    /opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic  my-topic3
+#    /opt/kafka/bin/kafka-console-producer.sh --broker-list [kafkahost]:9092 --topic  my-topic
+#    /opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092   --topic  my-topic3
 #
 # built in consumer
 #
 #   /opt/kafka/bin/kafka-console-consumer.sh --zookeeper 192.168.150.70:2181 --topic my-topic3  --from-beginning
+
+
+# describe all  topic details 
+#
+#   /opt/kafka/bin/kafka-topics.sh  --zookeeper [zookeeper]:2181    --describe
+#   /opt/kafka/bin/kafka-topics.sh --zookeeper  192.168.150.70:2181 --describe
+#   /opt/kafka/bin/kafka-topics.sh --zookeeper  192.168.150.70:2181 --describe --topic  test2
+
+# Check list of topics 
+#   
+#   /opt/kafka/bin/kafka-topics.sh   --zookeeper [zookeeper]:2181     --list
+#   /opt/kafka/bin/kafka-topics.sh   --zookeeper  192.168.150.70:2181 --list
+
+
+# python API examples 
+#
+#     consumerExample.py
+#     producerExample.py
+
+
+
 
 
