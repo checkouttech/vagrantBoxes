@@ -132,8 +132,9 @@ $FLINK/start-cluster.sh
 #
 #Word count ( kafka streaming )
 #
-#  TODO
-#
+#  TODO : currently not working
+#   sudo /opt/flink/bin/flink  run  /opt/flink/examples/streaming/Kafka.jar   --topic my-topic3 --bootstrap.servers 192.168.150.80:9092   --group.id  abc   --zookeeper.connect  192.168.150.70:2181
+
 #Word count ( batch )
 #
 # /opt/flink/bin/flink run  /opt/flink/examples/batch/WordCount.jar
@@ -148,6 +149,7 @@ $FLINK/start-cluster.sh
 #
 #Word count ( submit a job )
 #
+#    sudo /opt/flink/bin/flink run   --submit /opt/flink/examples/streaming/Kafka.jar   --topic my-topic3  --bootstrap.servers 192.168.150.80:9092   --group.id  abc   --zookeeper.connect  192.168.150.70:2181   --jobmanager  localhost:6122
 #
 #Location of log files
 #
