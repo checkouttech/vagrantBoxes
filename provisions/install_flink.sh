@@ -166,4 +166,7 @@ $FLINK/start-cluster.sh
 #export for the current session before starting kafka cluster
 #export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
 
+# dashboard
+#
+#  http://192.168.150.100:8081/#/overview
 
