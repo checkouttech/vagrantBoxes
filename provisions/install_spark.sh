@@ -75,18 +75,32 @@ echo 'spark-cluster.vm.local
 
 
 
+# export SPARK_DAEMON_JAVA_OPTS="-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=192.168.150.70:2181"
+# SPARK_WORKER_INSTANCES
+
+# /opt/spark/conf/spark-env.sh
+
+
+
+#export SPARK_WORKER_MEMORY=1g
+#export SPARK_EXECUTOR_MEMORY=512m
+#export SPARK_WORKER_INSTANCES=2
+#export SPARK_WORKER_CORES=2
+#export SPARK_WORKER_DIR=/home/knoldus/work/sparkdata
+
+
 ####################################################
-############# start spark cluster 
+############# start spark cluster
 ####################################################
 
 
-# start master 
+# start master
 # sudo /opt/spark/sbin/start-master.sh
 
-# start slave 
+# start slave
 # sudo /opt/spark/sbin/start-slave.sh   spark://192.168.150.130:7077
- 
-# start all 
+
+# start all
 /opt/spark/sbin/start-all.sh
 
 ####################################################
@@ -94,7 +108,7 @@ echo 'spark-cluster.vm.local
 ####################################################
 
 
-# Dashboard 
+# Dashboard
 # http://192.168.150.130:8080/
 
 
@@ -216,3 +230,28 @@ echo 'spark-cluster.vm.local
 ##export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
 #
 
+# Spark shell example
+
+
+#/opt/spark/bin/spark-shell   –master spark://localhost:7077
+
+
+
+
+#val file=sc.textFile(“READ.md”)
+# val file=sc.textFile("hdfs://192.168.150.120:9000/tmp/test-events.1468530694912")
+#file.count()
+#file.take(3)
+
+
+
+#
+#./bin/spark-submit \
+#      --class <main-class>
+#  --master <master-url> \
+#        --deploy-mode <deploy-mode> \
+#          --conf <key>=<value> \
+#            ... # other options
+#    <application-jar> \
+#          [application-arguments]
+#
