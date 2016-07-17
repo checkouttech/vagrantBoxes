@@ -6,13 +6,13 @@ wget --quiet  http://downloads.lightbend.com/scala/2.11.8/scala-2.11.8.tgz
 export SCALA_HOME=/opt/scala/
 export SCALA=$SCALA_HOME/bin
 export SCALA_CONFIG=$SCALA_HOME/conf
-export PATH=$PATH:$SCALA
+export PATH=$SCALA:$PATH
 
 #write to environment file for all future sessions
-sudo /bin/sh -c 'echo export SCALA_HOME="/opt/scala/" >> /etc/environment'
-sudo /bin/sh -c 'echo export SCALA="$SCALA_HOME/bin" >> /etc/environment'
-sudo /bin/sh -c 'echo export SCALA_CONF="$SCALA_HOME/conf" >> /etc/environment'
-sudo /bin/sh -c 'echo export PATH="$PATH:$SCALA" >> /etc/environment'
+sudo /bin/sh -c 'echo SCALA_HOME="/opt/scala/" >> /etc/environment'
+sudo /bin/sh -c 'echo SCALA="$SCALA_HOME/bin" >> /etc/environment'
+sudo /bin/sh -c 'echo SCALA_CONF="$SCALA_HOME/conf" >> /etc/environment'
+sudo /bin/sh -c 'echo PATH="$SCALA:$PATH" >> /etc/environment'
 
 #sudo mkdir /opt/scala
 sudo mkdir $SCALA_HOME
@@ -31,10 +31,10 @@ export SBT_CONFIG=$SBT_HOME/conf
 export PATH=$PATH:$SBT
 
 #write to environment file for all future sessions
-sudo /bin/sh -c 'echo export SBT_HOME="/opt/sbt/" >> /etc/environment'
-sudo /bin/sh -c 'echo export SBT="$SBT_HOME/bin" >> /etc/environment'
-sudo /bin/sh -c 'echo export SBT_CONF="$SBT_HOME/conf" >> /etc/environment'
-sudo /bin/sh -c 'echo export PATH="$PATH:$SBT" >> /etc/environment'
+sudo /bin/sh -c 'echo SBT_HOME="/opt/sbt/" >> /etc/environment'
+sudo /bin/sh -c 'echo SBT="$SBT_HOME/bin" >> /etc/environment'
+sudo /bin/sh -c 'echo SBT_CONF="$SBT_HOME/conf" >> /etc/environment'
+sudo /bin/sh -c 'echo PATH="$SBT:$PATH" >> /etc/environment'
 
 #sudo mkdir /opt/sbt
 sudo mkdir $SBT_HOME
