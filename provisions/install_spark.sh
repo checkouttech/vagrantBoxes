@@ -9,9 +9,9 @@ export SPARK_CONFIG=$SPARK_HOME/conf
 
 
 #write to environment file for all future sessions
-sudo /bin/sh -c 'echo export SPARK_HOME="/opt/spark/" >> /etc/environment'
-sudo /bin/sh -c 'echo export SPARK="$SPARK_HOME/bin" >> /etc/environment'
-sudo /bin/sh -c 'echo export SPARK_CONFIG="$SPARK_HOME/conf" >> /etc/environment'
+sudo /bin/sh -c 'echo SPARK_HOME="/opt/spark/" >> /etc/environment'
+sudo /bin/sh -c 'echo SPARK="$SPARK_HOME/bin" >> /etc/environment'
+sudo /bin/sh -c 'echo SPARK_CONFIG="$SPARK_HOME/conf" >> /etc/environment'
 
 
 #sudo mkdir /opt/spark
@@ -64,7 +64,7 @@ sudo sed -c -i "s/\(127.0.1.1 .*\)/#\1/" /etc/hosts
 # declare master / namenode
 ### sudo echo '
 ###  hadoop-master.vm.local
-### ' > $SPARK_CONF_DIR/masters
+### ' > $SPARK_CONFIG/masters
 
 
 ## declare task managers aka.  slave nodes
@@ -74,8 +74,11 @@ echo 'spark-cluster.vm.local
 ' > $SPARK_CONFIG/slaves
 
 
+# Integrate zookeeper
+echo '
+export SPARK_DAEMON_JAVA_OPTS="-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=192.168.150.70:2181"
+'>> $SPARK_CONFIG/spark-env.sh
 
-# export SPARK_DAEMON_JAVA_OPTS="-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=192.168.150.70:2181"
 # SPARK_WORKER_INSTANCES
 
 # /opt/spark/conf/spark-env.sh
