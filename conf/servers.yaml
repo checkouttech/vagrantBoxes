@@ -205,7 +205,7 @@
   - vm_port: 110
     host_port: 55110
   ip: 192.168.150.110
-  mem: 2048
+  mem: 8196
   cpu: 1
   type: devbox
   build: yes
@@ -293,5 +293,24 @@
   - provisions/install_jdk.sh
   - provisions/install_spark.sh
   - provisions/install_scala.sh
+
+
+- name: dashboard.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 140
+    host_port: 55140
+  ip: 192.168.150.140
+  mem: 256
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_dashboards.sh
 
 
