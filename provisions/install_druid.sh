@@ -33,7 +33,7 @@ sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../c
 
 # set deep storage
 export TARGET_KEY=druid.extensions.loadList
-export REPLACEMENT_VALUE=["druid-hdfs-storage"]
+export REPLACEMENT_VALUE='["druid-hdfs-storage"]'
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
 
@@ -74,22 +74,22 @@ sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/druid/_common/com
 sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
 
 
-########## 
+##########
 ### borker properties
-########## 
+##########
 
-sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/druid/broker/jvm.config
-sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/../conf-quickstart/druid/broker/jvm.config
+sudo sed -c -i "s/-Xms.*/-Xms1g/"  $DRUID_CONFIG/druid/broker/jvm.config
+sudo sed -c -i "s/-Xms.*/-Xms1g/"  $DRUID_CONFIG/../conf-quickstart/druid/broker/jvm.config
 
-sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/druid/broker/jvm.config
-sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/../conf-quickstart/druid/broker/jvm.config
+sudo sed -c -i "s/-Xmx.*/-Xmx1g/"  $DRUID_CONFIG/druid/broker/jvm.config
+sudo sed -c -i "s/-Xmx.*/-Xmx1g/"  $DRUID_CONFIG/../conf-quickstart/druid/broker/jvm.config
 
 sudo sed -c -i "s/-XX:MaxDirectMemorySize.*/-XX:MaxDirectMemorySize=1280m/"  $DRUID_CONFIG/druid/broker/jvm.config
 sudo sed -c -i "s/-XX:MaxDirectMemorySize.*/-XX:MaxDirectMemorySize=1280m/"  $DRUID_CONFIG/../conf-quickstart/druid/broker/jvm.config
 
 
 
-export TARGET_KEY=druid.server.http.numThreads 
+export TARGET_KEY=druid.server.http.numThreads
 export REPLACEMENT_VALUE=8
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/broker/runtime.properties
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/broker/runtime.properties
@@ -114,15 +114,15 @@ sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../c
 
 
 
-########## 
+##########
 ### coordinator properties
-########## 
+##########
 
-sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/druid/coordinator/jvm.config
-sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/../conf-quickstart/druid/coordinator/jvm.config
+sudo sed -c -i "s/-Xms.*/-Xms256m/"  $DRUID_CONFIG/druid/coordinator/jvm.config
+sudo sed -c -i "s/-Xms.*/-Xms256m/"  $DRUID_CONFIG/../conf-quickstart/druid/coordinator/jvm.config
 
-sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/druid/coordinator/jvm.config
-sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/../conf-quickstart/druid/coordinator/jvm.config
+sudo sed -c -i "s/-Xmx.*/-Xmx256m/"  $DRUID_CONFIG/druid/coordinator/jvm.config
+sudo sed -c -i "s/-Xmx.*/-Xmx256m/"  $DRUID_CONFIG/../conf-quickstart/druid/coordinator/jvm.config
 
 
 export TARGET_KEY=druid.coordinator.startDelay
@@ -138,15 +138,15 @@ sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../c
 
 
 
-########## 
+##########
 ### historical properties
-########## 
+##########
 
-sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/druid/historical/jvm.config
-sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/../conf-quickstart/druid/historical/jvm.config
+sudo sed -c -i "s/-Xms.*/-Xms1g/"  $DRUID_CONFIG/druid/historical/jvm.config
+sudo sed -c -i "s/-Xms.*/-Xms1g/"  $DRUID_CONFIG/../conf-quickstart/druid/historical/jvm.config
 
-sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/druid/historical/jvm.config
-sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/../conf-quickstart/druid/historical/jvm.config
+sudo sed -c -i "s/-Xmx.*/-Xmx1g/"  $DRUID_CONFIG/druid/historical/jvm.config
+sudo sed -c -i "s/-Xmx.*/-Xmx1g/"  $DRUID_CONFIG/../conf-quickstart/druid/historical/jvm.config
 
 sudo sed -c -i "s/-XX:MaxDirectMemorySize.*/-XX:MaxDirectMemorySize=1280m/"  $DRUID_CONFIG/druid/historical/jvm.config
 sudo sed -c -i "s/-XX:MaxDirectMemorySize.*/-XX:MaxDirectMemorySize=1280m/"  $DRUID_CONFIG/../conf-quickstart/druid/historical/jvm.config
@@ -155,7 +155,7 @@ sudo sed -c -i "s/-XX:MaxDirectMemorySize.*/-XX:MaxDirectMemorySize=1280m/"  $DR
 
 
 
-export TARGET_KEY=druid.server.http.numThreads 
+export TARGET_KEY=druid.server.http.numThreads
 export REPLACEMENT_VALUE=8
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/historical/runtime.properties
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/historical/runtime.properties
@@ -175,7 +175,7 @@ sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../c
 
 # TODO druid.segmentCache.locations
 export TARGET_KEY=druid.segmentCache.locations
-export REPLACEMENT_VALUE='[{"path":"var/druid/segment-cache","maxSize"\:300000000000}]'
+export REPLACEMENT_VALUE='[{"path":"var\/druid\/segment-cache","maxSize"\\:300000000000}]'
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/historical/runtime.properties
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/historical/runtime.properties
 
@@ -187,11 +187,11 @@ sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../c
 
 
 
-########## 
-### middle manager 
-########## 
+##########
+### middle manager
+##########
 
-export TARGET_KEY=druid.server.http.numThreads 
+export TARGET_KEY=druid.server.http.numThreads
 export REPLACEMENT_VALUE=8
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/middleManager/runtime.properties
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/middleManager/runtime.properties
@@ -210,16 +210,16 @@ sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../c
 
 
 
-########## 
+##########
 ### overlord properties
-########## 
+##########
 
 
-sudo sed -c -i "s/-Xms.*/-Xms256m/"  $druid_config/druid/overlord/jvm.config
-sudo sed -c -i "s/-Xms.*/-Xms256m/"  $druid_config/../conf-quickstart/druid/overlord/jvm.config
+sudo sed -c -i "s/-Xms.*/-Xms256m/"  $DRUID_CONFIG/druid/overlord/jvm.config
+sudo sed -c -i "s/-Xms.*/-Xms256m/"  $DRUID_CONFIG/../conf-quickstart/druid/overlord/jvm.config
 
-sudo sed -c -i "s/-Xmx.*/-Xmx256m/"  $druid_config/druid/overlord/jvm.config
-sudo sed -c -i "s/-Xmx.*/-Xmx256m/"  $druid_config/../conf-quickstart/druid/overlord/jvm.config
+sudo sed -c -i "s/-Xmx.*/-Xmx256m/"  $DRUID_CONFIG/druid/overlord/jvm.config
+sudo sed -c -i "s/-Xmx.*/-Xmx256m/"  $DRUID_CONFIG/../conf-quickstart/druid/overlord/jvm.config
 
 export TARGET_KEY=druid.indexer.queue.startDelay
 export REPLACEMENT_VALUE=PT5S
@@ -237,14 +237,14 @@ export REPLACEMENT_VALUE=192.168.150.70:2181
 sudo sed -c -i "s/\($TARGET_KEY*\:\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/tranquility/server.json
 sudo sed -c -i "s/\($TARGET_KEY*\:\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/tranquility/server.json
 
-# TODO : setup kafka zookeeper.connect 
-# TODO :  setup zookeeper.connect 
+# TODO : setup kafka zookeeper.connect
+# TODO :  setup zookeeper.connect
 
 
 
 
 ##########
-### HDFS properties 
+### HDFS properties
 ##########
 
 
@@ -352,7 +352,7 @@ sudo cp $DRUID_CONFIG/druid/_common/mapred-site.xml  $DRUID_CONFIG/../conf-quick
 
 
 ####################################################
-######## create required directories 
+######## create required directories
 ####################################################
 
 # create var directory
@@ -365,7 +365,7 @@ sudo mkdir -p $DRUID_HOME/log
 sudo chown -R vagrant:vagrant $DRUID_HOME/log/
 sudo chmod 755 -R  $DRUID_HOME/log/
 
-# create directory created by init script 
+# create directory created by init script
 sudo mkdir -p $DRUID_HOME/var
 sudo chown -R vagrant:vagrant $DRUID_HOME/var/
 sudo chmod 755 -R  $DRUID_HOME/var/
@@ -418,83 +418,13 @@ sudo mkdir $TRANQUILITY_HOME
 sudo  tar -zxvf tranquility-distribution-0.8.0.tgz  --strip-components 1  -C $TRANQUILITY_HOME
 
 ####################################################
-############# example 
+############# example
 ####################################################
-
-#sudo /opt/flink/bin/flink  run  /opt/flink/examples/streaming/Kafka.jar   --topic my-topic3  --bootstrap.servers 192.168.150.80:9092   --group.id  abc   --zookeeper.connect  192.168.150.70:2181
-#tail -f /opt/flink/log//flink-*-jobmanager-*.out
-
-#  /opt/flink/bin/flink run  /opt/flink/examples/batch/WordCount.jar
-
-
-
 
 
 ####################################################
-#### Restrict Java heap space to avoid overflowing limited free RAM 
-#### Else not all broker will get initialized 
+#### Restrict Java heap space to avoid overflowing limited free RAM
+#### Else not all broker will get initialized
 ####################################################
 
-#write to environment file for all future sessions 
-#sudo /bin/sh -c 'echo export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M" >> /etc/environment'
 
-#export for the current session before starting kafka cluster 
-#export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
-
-
-
-#
-## declare job manager(s) aka. master nodes 
-#
-#echo 'localhost:8081
-#localhost:8082' > $FLINK_CONFIG/masters
-#
-#
-#
-#
-## declare task managers aka.  slave nodes 
-## the slaves will be on same physical box 
-#
-#echo 'localhost
-#localhost' > $FLINK_CONFIG/slaves
-#
-#
-## set flink-conf.yaml
-#
-### set log directory 
-#export TARGET_KEY=taskmanager.tmp.dirs
-#export REPLACEMENT_VALUE=" \\/tmp\\/flink-temp"
-#
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
-#
-#
-### set tasks slots per slave/taskmanager 
-#export TARGET_KEY=taskmanager.numberOfTaskSlots
-#export REPLACEMENT_VALUE=" 3"
-#
-#sudo sed -c -i "s/\($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
-#
-## fs.hdfs.hadoopconf
-#
-#
-#
-## set recovery mode to zookeeper
-#export TARGET_KEY=recovery.mode
-#export REPLACEMENT_VALUE=" zookeeper"
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
-#
-#
-## set zookeeper server info 
-#export TARGET_KEY=recovery.zookeeper.quorum
-#export REPLACEMENT_VALUE=" 192.168.150.70:2181"
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
-#
-#
-## set recovery storage directory 
-## TODO : should be in hdfs 
-#export TARGET_KEY=recovery.zookeeper.storageDir
-#export REPLACEMENT_VALUE=" \\/tmp\\/"
-#sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml 
-#
-#
-#
