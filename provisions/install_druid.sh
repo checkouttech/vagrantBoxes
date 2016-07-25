@@ -31,6 +31,169 @@ sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/drui
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
 
 
+# set deep storage
+export TARGET_KEY=druid.extensions.loadList
+export REPLACEMENT_VALUE=["druid-hdfs-storage"]
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+export LINE_TO_UNCOMMENT=druid.storage.type=hdfs
+sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+export LINE_TO_UNCOMMENT='druid.storage.storageDirectory=\/druid\/segments'
+sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+export LINE_TO_UNCOMMENT=druid.indexer.logs.type=hdfs
+sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+
+export LINE_TO_UNCOMMENT='druid.indexer.logs.directory=\/druid\/indexing-logs'
+sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+
+# #########################
+
+export LINE_TO_COMMENT=druid.storage.type=local
+sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+export LINE_TO_COMMENT='druid.storage.storageDirectory=var\/druid\/segments'
+sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+export LINE_TO_COMMENT=druid.indexer.logs.type=file
+sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+export LINE_TO_COMMENT='druid.indexer.logs.directory=var\/druid\/indexing-logs'
+sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+
+########## 
+### runtime.properties
+########## 
+
+# set deep storage
+export TARGET_KEY=druid.indexer.task.hadoopWorkingPath
+export REPLACEMENT_VALUE='\/tmp\/druid-indexing'
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/middleManager/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/middleManager/runtime.properties
+
+
+
+##########
+### HDFS properties 
+##########
+
+
+# write core-site.xml
+
+sudo echo '<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+   <property>
+      <name>fs.default.name</name>
+      <value>hdfs://hadoop-master.vm.local:9000/</value>
+   </property>
+   <property>
+      <name>dfs.permissions</name>
+      <value>false</value>
+   </property>
+</configuration>
+
+' > $DRUID_CONFIG/druid/_common/core-site.xml
+
+sudo cp $DRUID_CONFIG/druid/_common/core-site.xml  $DRUID_CONFIG/../conf-quickstart/druid/_common/
+
+
+# write hdfs-site.xml
+
+sudo echo '<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+
+<configuration>
+   <property>
+      <name>dfs.data.dir</name>
+      <value>/opt/hadoop/hadoop/dfs/name/data</value>
+      <final>true</final>
+   </property>
+
+   <property>
+      <name>dfs.name.dir</name>
+      <value>/opt/hadoop/hadoop/dfs/name</value>
+      <final>true</final>
+   </property>
+
+   <property>
+      <name>dfs.replication</name>
+      <value>1</value>
+   </property>
+</configuration>
+
+' > $DRUID_CONFIG/druid/_common/hdfs-site.xml
+
+sudo cp $DRUID_CONFIG/druid/_common/hdfs-site.xml  $DRUID_CONFIG/../conf-quickstart/druid/_common/
+
+
+
+# write mapred-site.xml
+
+sudo echo '<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+   <property>
+      <name>mapred.job.tracker</name>
+      <value>hadoop-master.vm.local:9001</value>
+   </property>
+</configuration>
+
+' > $DRUID_CONFIG/druid/_common/mapred-site.xml
+
+sudo cp $DRUID_CONFIG/druid/_common/mapred-site.xml  $DRUID_CONFIG/../conf-quickstart/druid/_common/
+
+
+
+
+
+
+
+# sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
+
+#druid.storage.type=local
+#druid.storage.storageDirectory=var/druid/segments
+
+#druid.storage.type=hdfs
+#druid.storage.storageDirectory=/druid/segments
+
+#druid.indexer.logs.type=file
+#druid.indexer.logs.directory=var/druid/indexing-logs
+
+
+#druid.indexer.logs.type=hdfs
+#druid.indexer.logs.directory=/druid/indexing-logs
+
+
+
+
+
+
+
+
+
 ####################################################
 ######## create required directories 
 ####################################################
