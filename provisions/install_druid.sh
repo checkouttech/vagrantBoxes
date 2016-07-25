@@ -75,14 +75,171 @@ sudo sed -c -i "s/\($LINE_TO_COMMENT\).*/#\1/"   $DRUID_CONFIG/../conf-quickstar
 
 
 ########## 
-### runtime.properties
+### borker properties
 ########## 
 
-# set deep storage
+sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/druid/broker/jvm.config
+sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/../conf-quickstart/druid/broker/jvm.config
+
+sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/druid/broker/jvm.config
+sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/../conf-quickstart/druid/broker/jvm.config
+
+sudo sed -c -i "s/-XX:MaxDirectMemorySize.*/-XX:MaxDirectMemorySize=1280m/"  $DRUID_CONFIG/druid/broker/jvm.config
+sudo sed -c -i "s/-XX:MaxDirectMemorySize.*/-XX:MaxDirectMemorySize=1280m/"  $DRUID_CONFIG/../conf-quickstart/druid/broker/jvm.config
+
+
+
+export TARGET_KEY=druid.server.http.numThreads 
+export REPLACEMENT_VALUE=8
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/broker/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/broker/runtime.properties
+
+
+export TARGET_KEY=druid.processing.buffer.sizeBytes
+export REPLACEMENT_VALUE=256000000
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/broker/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/broker/runtime.properties
+
+
+export TARGET_KEY=druid.processing.numThreads
+export REPLACEMENT_VALUE=2
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/broker/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/broker/runtime.properties
+
+
+export TARGET_KEY=druid.cache.sizeInBytes
+export REPLACEMENT_VALUE=10000000
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/broker/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/broker/runtime.properties
+
+
+
+########## 
+### coordinator properties
+########## 
+
+sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/druid/coordinator/jvm.config
+sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/../conf-quickstart/druid/coordinator/jvm.config
+
+sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/druid/coordinator/jvm.config
+sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/../conf-quickstart/druid/coordinator/jvm.config
+
+
+export TARGET_KEY=druid.coordinator.startDelay
+export REPLACEMENT_VALUE=PT10S
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/coordinator/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/coordinator/runtime.properties
+
+
+export TARGET_KEY=druid.coordinator.period
+export REPLACEMENT_VALUE=PT5S
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/coordinator/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/coordinator/runtime.properties
+
+
+
+########## 
+### historical properties
+########## 
+
+sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/druid/historical/jvm.config
+sudo sed -c -i "s/-xms.*/-xms1g/"  $druid_config/../conf-quickstart/druid/historical/jvm.config
+
+sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/druid/historical/jvm.config
+sudo sed -c -i "s/-xmx.*/-xmx1g/"  $druid_config/../conf-quickstart/druid/historical/jvm.config
+
+sudo sed -c -i "s/-XX:MaxDirectMemorySize.*/-XX:MaxDirectMemorySize=1280m/"  $DRUID_CONFIG/druid/historical/jvm.config
+sudo sed -c -i "s/-XX:MaxDirectMemorySize.*/-XX:MaxDirectMemorySize=1280m/"  $DRUID_CONFIG/../conf-quickstart/druid/historical/jvm.config
+
+
+
+
+
+export TARGET_KEY=druid.server.http.numThreads 
+export REPLACEMENT_VALUE=8
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/historical/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/historical/runtime.properties
+
+
+export TARGET_KEY=druid.processing.buffer.sizeBytes
+export REPLACEMENT_VALUE=256000000
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/historical/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/historical/runtime.properties
+
+
+export TARGET_KEY=druid.processing.numThreads
+export REPLACEMENT_VALUE=2
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/historical/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/historical/runtime.properties
+
+
+# TODO druid.segmentCache.locations
+export TARGET_KEY=druid.segmentCache.locations
+export REPLACEMENT_VALUE='[{"path":"var/druid/segment-cache","maxSize"\:300000000000}]'
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/historical/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/historical/runtime.properties
+
+
+export TARGET_KEY=druid.server.maxSize
+export REPLACEMENT_VALUE=300000000000
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/historical/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/historical/runtime.properties
+
+
+
+########## 
+### middle manager 
+########## 
+
+export TARGET_KEY=druid.server.http.numThreads 
+export REPLACEMENT_VALUE=8
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/middleManager/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/middleManager/runtime.properties
+
+
+export TARGET_KEY=druid.processing.buffer.sizeBytes
+export REPLACEMENT_VALUE=256000000
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/middleManager/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/middleManager/runtime.properties
+
+
 export TARGET_KEY=druid.indexer.task.hadoopWorkingPath
 export REPLACEMENT_VALUE='\/tmp\/druid-indexing'
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/middleManager/runtime.properties
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/middleManager/runtime.properties
+
+
+
+########## 
+### overlord properties
+########## 
+
+
+sudo sed -c -i "s/-Xms.*/-Xms256m/"  $druid_config/druid/overlord/jvm.config
+sudo sed -c -i "s/-Xms.*/-Xms256m/"  $druid_config/../conf-quickstart/druid/overlord/jvm.config
+
+sudo sed -c -i "s/-Xmx.*/-Xmx256m/"  $druid_config/druid/overlord/jvm.config
+sudo sed -c -i "s/-Xmx.*/-Xmx256m/"  $druid_config/../conf-quickstart/druid/overlord/jvm.config
+
+export TARGET_KEY=druid.indexer.queue.startDelay
+export REPLACEMENT_VALUE=PT5S
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/overlord/runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/overlord/runtime.properties
+
+
+####################################################
+############# tranquility  settings
+####################################################
+
+# set remote zookeeper for tranquility
+export TARGET_KEY=zookeeper.connect
+export REPLACEMENT_VALUE=192.168.150.70:2181
+sudo sed -c -i "s/\($TARGET_KEY*\:\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/tranquility/server.json
+sudo sed -c -i "s/\($TARGET_KEY*\:\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/tranquility/server.json
+
+# TODO : setup kafka zookeeper.connect 
+# TODO :  setup zookeeper.connect 
+
 
 
 
@@ -259,16 +416,6 @@ sudo /bin/sh -c 'echo export TRANQUILITY_CONFIG="$TRANQUILITY_HOME/conf" >> /etc
 sudo mkdir $TRANQUILITY_HOME
 
 sudo  tar -zxvf tranquility-distribution-0.8.0.tgz  --strip-components 1  -C $TRANQUILITY_HOME
-
-####################################################
-############# config settings
-####################################################
-
-# set remote zookeeper for tranquility
-export TARGET_KEY=zookeeper.connect
-export REPLACEMENT_VALUE=192.168.150.70:2181
-sudo sed -c -i "s/\($TARGET_KEY*\:\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/tranquility/server.json
-sudo sed -c -i "s/\($TARGET_KEY*\:\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/tranquility/server.json
 
 ####################################################
 ############# example 
