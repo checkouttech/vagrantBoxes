@@ -218,6 +218,37 @@
   - provisions/install_druid.sh
 
 
+
+- name: druid-broker.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 111
+    host_port: 55111
+  ip: 192.168.150.111
+  mem: 4098
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_druid.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
 - name: hadoop-master.vm.local
   box: centos7
   port_forwarding:
