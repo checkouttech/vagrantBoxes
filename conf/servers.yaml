@@ -239,6 +239,83 @@
 
 
 
+- name: druid-historical.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 112
+    host_port: 55112
+  ip: 192.168.150.112
+  mem: 4098
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_druid.sh
+
+
+- name: druid-coordinator.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 113
+    host_port: 55113
+  ip: 192.168.150.113
+  mem: 1024
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_druid.sh
+
+
+- name: druid-overlord.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 114
+    host_port: 55114
+  ip: 192.168.150.114
+  mem: 1024
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_druid.sh
+
+
+- name: druid-middlemanager.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 115
+    host_port: 55115
+  ip: 192.168.150.115
+  mem: 256
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_druid.sh
+
+
+
 
 
 
