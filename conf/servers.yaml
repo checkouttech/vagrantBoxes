@@ -225,7 +225,7 @@
   - vm_port: 111
     host_port: 55111
   ip: 192.168.150.111
-  mem: 4098
+  mem: 2048
   cpu: 1
   type: devbox
   build: yes
@@ -245,7 +245,7 @@
   - vm_port: 112
     host_port: 55112
   ip: 192.168.150.112
-  mem: 4098
+  mem: 2048
   cpu: 1
   type: devbox
   build: yes
@@ -264,7 +264,7 @@
   - vm_port: 113
     host_port: 55113
   ip: 192.168.150.113
-  mem: 1024
+  mem: 512
   cpu: 1
   type: devbox
   build: yes
@@ -283,7 +283,7 @@
   - vm_port: 114
     host_port: 55114
   ip: 192.168.150.114
-  mem: 1024
+  mem: 512
   cpu: 1
   type: devbox
   build: yes
@@ -314,6 +314,25 @@
   - provisions/install_jdk.sh
   - provisions/install_druid.sh
 
+
+
+- name: druid-metadata-storage.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 118
+    host_port: 55118
+  ip: 192.168.150.118
+  mem: 256
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_derby.sh
 
 
 

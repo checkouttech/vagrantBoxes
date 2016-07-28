@@ -9,7 +9,11 @@ sudo yum -y install rpm-build
 
 
 
+sudo yum -y install telnet
+sudo yum -y install netstat
+
 
 # Disable firewall
 sudo systemctl stop firewalld
+sudo systemctl disable firewalld
 

@@ -31,6 +31,19 @@ sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/drui
 sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
 
 
+# set remote metadata server
+export TARGET_KEY=druid.metadata.storage.connector.connectURI
+export REPLACEMENT_VALUE='jdbc:derby:\/\/192.168.150.118:1527\/var\/druid\/metadata.db;create=true'
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+
+export TARGET_KEY=druid.metadata.storage.connector.host
+export REPLACEMENT_VALUE=192.168.150.118
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
+sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+
 # set deep storage
 export TARGET_KEY=druid.extensions.loadList
 export REPLACEMENT_VALUE='["druid-hdfs-storage"]'
@@ -53,6 +66,9 @@ sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/../conf-quickst
 export LINE_TO_UNCOMMENT='druid.indexer.logs.directory=\/druid\/indexing-logs'
 sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/druid/_common/common.runtime.properties
 sudo sed -c -i "s/#\($LINE_TO_UNCOMMENT\).*/\1/"   $DRUID_CONFIG/../conf-quickstart/druid/_common/common.runtime.properties
+
+
+
 
 
 # #########################
@@ -393,6 +409,19 @@ sudo chmod 755 -R /data/druid_output
 ####################################################
 
 #$DRUID/init
+
+#  java `cat $DRUID_CONFIG//druid/broker/jvm.config | xargs` -cp "$DRUID_CONFIG/druid/_common:$DRUID_CONFIG/druid/broker:$DRUID_HOME/lib/*" io.druid.cli.Main server broker
+
+#  java `cat $DRUID_CONFIG/druid/historical/jvm.config | xargs` -cp "$DRUID_CONFIG/druid/_common:$DRUID_CONFIG/druid/historical:lib/*" io.druid.cli.Main server historical
+
+
+
+#  java `cat $DRUID_CONFIG/druid/coordinator/jvm.config | xargs` -cp "$DRUID_CONFIG/druid/_common:$DRUID_CONFIG/druid/coordinator:lib/*" io.druid.cli.Main server coordinator
+
+#  java `cat $DRUID_CONFIG/druid/overlord/jvm.config | xargs` -cp "$DRUID_CONFIG/druid/_common:$DRUID_CONFIG/druid/overlord:lib/*" io.druid.cli.Main server overlord
+
+#  java `cat $DRUID_CONFIG/druid/middleManager/jvm.config | xargs` -cp "$DRUID_CONFIG/druid/_common:$DRUID_CONFIG/druid/middleManager:lib/*" io.druid.cli.Main server middleManager
+
 
 ####################################################################################################
 ####################################################################################################
