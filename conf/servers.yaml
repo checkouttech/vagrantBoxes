@@ -316,6 +316,26 @@
 
 
 
+- name: druid-realtime.vm.local
+  box: centos7
+  port_forwarding:
+  - vm_port: 116
+    host_port: 55116
+  ip: 192.168.150.116
+  mem: 256
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/create_user_account.sh
+  - provisions/copy_keys.sh
+  - provisions/install_apache.sh
+  - provisions/install_tools.sh
+  - provisions/install_jdk.sh
+  - provisions/install_druid.sh
+
+
+
 - name: druid-metadata-storage.vm.local
   box: centos7
   port_forwarding:
