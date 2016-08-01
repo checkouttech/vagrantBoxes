@@ -247,14 +247,38 @@ sudo sed -c -i "s/\($TARGET_KEY=\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../c
 ############# tranquility  settings
 ####################################################
 
-# set remote zookeeper for tranquility
+# server settings
+# set remote zookeeper for tranquility server
 export TARGET_KEY=zookeeper.connect
 export REPLACEMENT_VALUE=192.168.150.70:2181
-sudo sed -c -i "s/\($TARGET_KEY*\:\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/tranquility/server.json
-sudo sed -c -i "s/\($TARGET_KEY*\:\).*/\1$REPLACEMENT_VALUE/"   $DRUID_CONFIG/../conf-quickstart/tranquility/server.json
+sudo sed -c -i "s/\($TARGET_KEY.* \: \).*/\1\"$REPLACEMENT_VALUE\",/"   $DRUID_CONFIG/tranquility/server.json
+sudo sed -c -i "s/\($TARGET_KEY.* \: \).*/\1\"$REPLACEMENT_VALUE\",/"   $DRUID_CONFIG/../conf-quickstart/tranquility/server.json
+
+
+
+# kafka settings
+# set remote zookeeper for tranquility server
+export TARGET_KEY=zookeeper.connect
+export REPLACEMENT_VALUE=192.168.150.70:2181
+sudo sed -c -i "s/\($TARGET_KEY.* \: \).*/\1\"$REPLACEMENT_VALUE\",/"   $DRUID_CONFIG/tranquility/kafka.json
+sudo sed -c -i "s/\($TARGET_KEY.* \: \).*/\1\"$REPLACEMENT_VALUE\",/"   $DRUID_CONFIG/../conf-quickstart/tranquility/kafka.json
+
+
+
+# set remote zookeeper for tranquility server
+export TARGET_KEY=kafka.zookeeper.connect
+export REPLACEMENT_VALUE=192.168.150.70:2181
+sudo sed -c -i "s/\($TARGET_KEY.* \: \).*/\1\"$REPLACEMENT_VALUE\",/"   $DRUID_CONFIG/tranquility/kafka.json
+sudo sed -c -i "s/\($TARGET_KEY.* \: \).*/\1\"$REPLACEMENT_VALUE\",/"   $DRUID_CONFIG/../conf-quickstart/tranquility/kafka.json
+
+
+
+
+
 
 # TODO : setup kafka zookeeper.connect
-# TODO :  setup zookeeper.connect
+
+
 
 
 
@@ -340,33 +364,6 @@ sudo cp $DRUID_CONFIG/druid/_common/mapred-site.xml  $DRUID_CONFIG/../conf-quick
 
 
 
-
-
-
-
-# sudo sed -c -i "s/# \($TARGET_KEY*\:*\).*/\1$REPLACEMENT_VALUE/" $FLINK_CONFIG/flink-conf.yaml
-
-#druid.storage.type=local
-#druid.storage.storageDirectory=var/druid/segments
-
-#druid.storage.type=hdfs
-#druid.storage.storageDirectory=/druid/segments
-
-#druid.indexer.logs.type=file
-#druid.indexer.logs.directory=var/druid/indexing-logs
-
-
-#druid.indexer.logs.type=hdfs
-#druid.indexer.logs.directory=/druid/indexing-logs
-
-
-
-
-
-
-
-
-
 ####################################################
 ######## create required directories
 ####################################################
@@ -415,13 +412,14 @@ sudo chmod 755 -R /data/druid_output
 #  java `cat $DRUID_CONFIG/druid/historical/jvm.config | xargs` -cp "$DRUID_CONFIG/druid/_common:$DRUID_CONFIG/druid/historical:lib/*" io.druid.cli.Main server historical
 
 
-
 #  java `cat $DRUID_CONFIG/druid/coordinator/jvm.config | xargs` -cp "$DRUID_CONFIG/druid/_common:$DRUID_CONFIG/druid/coordinator:lib/*" io.druid.cli.Main server coordinator
 
 #  java `cat $DRUID_CONFIG/druid/overlord/jvm.config | xargs` -cp "$DRUID_CONFIG/druid/_common:$DRUID_CONFIG/druid/overlord:lib/*" io.druid.cli.Main server overlord
 
 #  java `cat $DRUID_CONFIG/druid/middleManager/jvm.config | xargs` -cp "$DRUID_CONFIG/druid/_common:$DRUID_CONFIG/druid/middleManager:lib/*" io.druid.cli.Main server middleManager
 
+#  $TRANQUILITY_HOME/bin/tranquility server -configFile  $DRUID_CONFIG/tranquility/server.json
+#  $TRANQUILITY_HOME/bin/tranquility kafka  -configFile  $DRUID_CONFIG/tranquility/kafka.json
 
 ####################################################################################################
 ####################################################################################################
@@ -446,14 +444,9 @@ sudo mkdir $TRANQUILITY_HOME
 
 sudo  tar -zxvf tranquility-distribution-0.8.0.tgz  --strip-components 1  -C $TRANQUILITY_HOME
 
+
+
 ####################################################
 ############# example
 ####################################################
-
-
-####################################################
-#### Restrict Java heap space to avoid overflowing limited free RAM
-#### Else not all broker will get initialized
-####################################################
-
 
