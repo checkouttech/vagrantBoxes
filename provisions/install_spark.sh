@@ -56,6 +56,7 @@ sudo chmod 755 -R $SPARK_HOME
 # NOTE : Very very important for master to listen on hostname:9000 channel
 # to be run only on hadoop master
 sudo sed -c -i "s/\(127.0.1.1 .*\)/#\1/" /etc/hosts
+sudo sed -c -i "s/\(127.0.0.1 .*\)/#\1/" /etc/hosts
 
 ####################################################
 ############# config settings
