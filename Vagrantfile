@@ -37,8 +37,14 @@ Vagrant.configure(2) do |config|
           config.vm.network :private_network, ip: servers["ip"]
   
           # To set resevered memory 
-          #config.vm.memory = servers["mem"]
-    
+          # config.vm.memory = servers["mem"]  -- Does not works 
+          # vm.customize [ "--memory", "2048"] 
+          #config.vm.customize ["modifyvm", :id, "--memory", 2048] 
+          config.vm.provider :virtualbox do |vb|  
+               #vb.customize ['modifyvm', :id,'--memory', 2048]
+               vb.customize ['modifyvm', :id,'--memory', servers["mem"] ]
+          end
+
           # To disable vagrant from overwriting/inserting "prodicion" user's pre-existing keys  
           config.ssh.insert_key = false
     
