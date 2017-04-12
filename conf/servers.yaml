@@ -2,6 +2,24 @@
 ## SERVER COLLECTION
 #####################
 
+
+- name: app-dev1.vm.local
+  box: centos72
+  ip: 192.168.140.101
+  port_forwarding:
+  - vm_port: 80
+    host_port: 40101
+  mem: 2048
+  cpu: 1
+  type: devbox
+  build: yes
+  provision:
+  - provisions/install_apache.sh
+  - provisions/install_jdk.sh
+  - provisions/install_spark.sh
+  - provisions/install_scala.sh
+
+
 - name: dev1.vm.local
   box: centos7
   ip: 192.168.150.101
@@ -122,7 +140,7 @@
   - provisions/install_kafka.sh
 
 - name: zookeeper.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 80
     host_port: 55070
@@ -423,7 +441,7 @@
 
 
 - name: spark-cluster.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 130
     host_port: 55130
