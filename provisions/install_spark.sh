@@ -3,6 +3,7 @@
 # download spark
 # wget --quiet  https://dist.apache.org/repos/dist/release/spark/spark-2.0.0-preview/spark-2.0.0-preview-bin-hadoop2.7.tgz
 wget --quiet  https://dist.apache.org/repos/dist/release/spark/spark-2.1.0/spark-2.1.0-bin-hadoop2.7.tgz
+wget --quiet  https://archive.apache.org/dist/spark/spark-2.1.0/spark-2.1.0-bin-hadoop2.7.tgz
 
 export SPARK_HOME=/opt/spark/
 export SPARK=$SPARK_HOME/bin
