@@ -492,6 +492,10 @@
   - provisions/install_apache.sh
   - provisions/install_tools.sh
   - provisions/install_jdk.sh
-  - provisions/install_elk.sh
+  - provisions/install_elasticsearch.sh 
+  - provisions/install_kibana.sh
+  - provisions/install_logstash.sh
+  - provisions/settings.sh
 
+#  - provisions/install_elk.sh
 
