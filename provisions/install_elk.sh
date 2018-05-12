@@ -59,6 +59,12 @@ sudo tar -zxvf $KIBANA_PACKAGE --strip-components 1 -C $KIBANA_HOME
 sudo chown -R vagrant:vagrant $KIBANA_HOME
 sudo chmod 755 -R $KIBANA_HOME
 
+# needed to access kibana from outside 
+sudo /bin/sh -c 'echo "server.host: 0.0.0.0" >> /opt/kibana/config/kibana.yml'
+# declare elasticsearch url 
+sudo /bin/sh -c 'echo "elasticsearch.url: "http://192.168.150.150:9200" >> /opt/kibana/config/kibana.yml'
+
+
 export PATH=$KIBANA_HOME/bin:$PATH
 
 #write to environment file for all future sessions 
@@ -83,6 +89,14 @@ sudo tar -zxvf $LOGSTASH_PACKAGE --strip-components 1 -C $LOGSTASH_HOME
 sudo chown -R vagrant:vagrant $LOGSTASH_HOME 
 sudo chmod 755 -R $LOGSTASH_HOME
 
+# needed to access logstash from outside 
+sudo /bin/sh -c 'echo "http.host: "0.0.0.0"  >> /opt/logstash/config/logstash.yml'
+# declare elasticsearch url 
+sudo /bin/sh -c 'echo "var.elasticsearch.hosts: "http://192.168.150.150:9200/" >> /opt/logstash/config/logstash.yml'
+# declare kibana url 
+sudo /bin/sh -c 'echo "var.kibana.host: "http://192.168.150.150:5601/" >> /opt/logstash/config/logstash.yml'
+
+
 export PATH=$LOGSTASH_HOME/bin:$PATH
 
 #write to environment file for all future sessions 
@@ -92,9 +106,18 @@ sudo /bin/sh -c '.  /etc/environment ; echo PATH="$LOGSTASH_HOME/bin:$PATH" >> /
 
 
 
+
+
+
 # Disable firewall 
 sudo systemctl stop firewalld
 sudo systemctl disable firewalld
+
+
+
+
+
+
 
 
 
