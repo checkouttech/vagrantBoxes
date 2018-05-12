@@ -16,6 +16,24 @@ sudo mkdir $ES_HOME
 
 sudo tar -zxvf $ES_PACKAGE   --strip-components 1  -C $ES_HOME
 
+## give permission to entire elasticsearch setup directory
+sudo chown -R vagrant:vagrant $ES_HOME
+sudo chmod 755 -R $ES_HOME
+
+
+
+# needed to access elasticsearch from outside 
+sudo /bin/sh -c 'echo "network.host: 0.0.0.0" >> /opt/elasticsearch/config/elasticsearch.yml'
+
+
+# set file descriptors 
+sudo /bin/sh -c 'echo "vagrant          -       nofile          65536" >> /etc/security/limits.conf  '
+# set max map count 
+sudo sysctl -w vm.max_map_count=262144
+
+
+
+
 export PATH=$ES_HOME/bin:$PATH
 
 #write to environment file for all future sessions 
@@ -37,6 +55,10 @@ sudo mkdir $KIBANA_HOME
 
 sudo tar -zxvf $KIBANA_PACKAGE --strip-components 1 -C $KIBANA_HOME
 
+## give permission to entire kibana setup directory
+sudo chown -R vagrant:vagrant $KIBANA_HOME
+sudo chmod 755 -R $KIBANA_HOME
+
 export PATH=$KIBANA_HOME/bin:$PATH
 
 #write to environment file for all future sessions 
@@ -57,6 +79,10 @@ sudo mkdir $LOGSTASH_HOME
 
 sudo tar -zxvf $LOGSTASH_PACKAGE --strip-components 1 -C $LOGSTASH_HOME
 
+## give permission to entire logstash setup directory
+sudo chown -R vagrant:vagrant $LOGSTASH_HOME 
+sudo chmod 755 -R $LOGSTASH_HOME
+
 export PATH=$LOGSTASH_HOME/bin:$PATH
 
 #write to environment file for all future sessions 
@@ -66,10 +92,14 @@ sudo /bin/sh -c '.  /etc/environment ; echo PATH="$LOGSTASH_HOME/bin:$PATH" >> /
 
 
 
+# Disable firewall 
+sudo systemctl stop firewalld
+sudo systemctl disable firewalld
 
-#sudo tar -xzf jdk-8u45-linux-x64.tar.gz -C /opt/
-# export JAVA_HOME=/opt/jdk1.8.0_45
 
+
+sudo   echo '0.0.0.0 localhost' >> /etc/hosts
+sudo /etc/init.d/network restart
 
 ## Other option ( needs yum ) 
 # working version 
