@@ -18,7 +18,7 @@ sudo chmod 755 -R $LOGSTASH_HOME
 
 # needed to access logstash from outside 
 sudo /bin/sh -c 'echo "http.host: 0.0.0.0"  >> /opt/logstash/config/logstash.yml'
-
+# http.host: 0.0.0.0
 # declare elasticsearch url 
 #sudo /bin/sh -c 'echo "var.elasticsearch.hosts: http://192.168.150.150:9200/" >> /opt/logstash/config/logstash.yml'
 # declare kibana url 

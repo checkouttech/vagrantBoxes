@@ -22,6 +22,15 @@ sudo /bin/sh -c 'echo "server.host: 0.0.0.0" >> /opt/kibana/config/kibana.yml'
 # declare elasticsearch url 
 sudo /bin/sh -c 'echo "elasticsearch.url: http://192.168.150.150:9200" >> /opt/kibana/config/kibana.yml'
 
+
+
+#tilemap.url: "https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg"
+# tilemap.options.maxZoom: 20
+# tilemap.options.attribution: 'Aerial imagery'
+
+
+
+
 # setup paths
 export PATH=$KIBANA_HOME/bin:$PATH
 
