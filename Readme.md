@@ -312,3 +312,45 @@ Todo -
 
 
 
+
+
+
+vagrant plugin install vagrant-scp
+
+
+So you can run below command to copy your local file to vagrant instance. password is the same as username which is vagrant.
+
+scp -P 2222 your_file vagrant@127.0.0.1:.
+You can also copy the file back to your local host.
+
+scp -P 2222 vagrant@127.0.0.1:/PATH/filename .
+
+
+
+vagrant plugin install vagrant-scp
+Use it like so:
+
+vagrant scp <some_local_file_or_dir> [vm_name]:<somewhere_on_the_vm>
+
+
+Works -- 
+
+kapilmahant@Apples-MacBook-Pro vagrantBoxes % vagrant upload /tmp/foo2  /home/vagrant/  dev2.vm.local
+
+
+
+not workking -- 
+kapilmahant@Apples-MacBook-Pro vagrantBoxes % scp -P 2222 /tmp/foo3 vagrant@dev2.vm.local:/home/vagrant/
+
+
+
+vagrant global-status
+
+kapilmahant@Apples-MacBook-Pro vagrantBoxes % scp -P 2222 /tmp/foo3 vagrant@192.168.150.101:.
+
+
+
+WORKS 
+
+kapilmahant@Apples-MacBook-Pro vagrantBoxes % scp -P 2222 /tmp/foo3 vagrant@127.0.0.1:.
+

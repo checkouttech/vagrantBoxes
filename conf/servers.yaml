@@ -2,14 +2,14 @@
 ## SERVER COLLECTION
 #####################
 
-- name: dev1.vm.local
-  box: centos7
+- name: dev2.vm.local
+  box: centos72  
   ip: 192.168.150.101
   port_forwarding:
   - vm_port: 80
     host_port: 50000
   - vm_port: 600
-    host_port: 50001
+    host_port: 50011
   mem: 2048
   cpu: 1
   type: devbox
@@ -20,7 +20,7 @@
   - provisions/install_apache.sh
 
 - name: jenkins-master.vm.local
-  box: centos7
+  box: centos72
   ip: 192.168.150.11
   port_forwarding:
   - vm_port: 80
@@ -41,7 +41,7 @@
   - provisions/install_sonar_runner.sh
 
 - name: fakebidder.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 80
     host_port: 55101
@@ -62,7 +62,7 @@
 
 
 - name: graphite.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 80
     host_port: 54000
@@ -86,7 +86,7 @@
 
 
 - name: sonarqube.vm.local
-  box: centos7
+  box: centos72
   ip: 192.168.150.21
   port_forwarding:
   - vm_port: 80
@@ -103,7 +103,7 @@
 
 
 - name: data.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 80
     host_port: 55060
@@ -140,7 +140,7 @@
   - provisions/install_zookeeper.sh
 
 - name: kafka.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 80
     host_port: 55080
@@ -159,7 +159,7 @@
 
 
 - name: flume.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 90
     host_port: 55090
@@ -179,7 +179,7 @@
 
 
 - name: streaming.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 100
     host_port: 55100
@@ -200,7 +200,7 @@
 
 
 - name: druid.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 110
     host_port: 55110
@@ -220,7 +220,7 @@
 
 
 - name: druid-broker.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 111
     host_port: 55111
@@ -240,7 +240,7 @@
 
 
 - name: druid-historical.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 112
     host_port: 55112
@@ -259,7 +259,7 @@
 
 
 - name: druid-coordinator.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 113
     host_port: 55113
@@ -278,7 +278,7 @@
 
 
 - name: druid-overlord.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 114
     host_port: 55114
@@ -297,7 +297,7 @@
 
 
 - name: druid-middlemanager.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 115
     host_port: 55115
@@ -317,7 +317,7 @@
 
 
 - name: druid-realtime.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 116
     host_port: 55116
@@ -337,7 +337,7 @@
 
 
 - name: druid-metadata-storage.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 118
     host_port: 55118
@@ -366,7 +366,7 @@
 
 
 - name: hadoop-master.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 120
     host_port: 55120
@@ -385,7 +385,7 @@
 
 
 - name: hadoop-slave-1.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 121
     host_port: 55121
@@ -404,7 +404,7 @@
 
 
 - name: hadoop-slave-2.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 122
     host_port: 55122
@@ -443,7 +443,7 @@
 
 
 - name: dashboard.vm.local
-  box: centos7
+  box: centos72
   port_forwarding:
   - vm_port: 140
     host_port: 55140

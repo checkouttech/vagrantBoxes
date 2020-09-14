@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # download spark
-# wget --quiet  https://dist.apache.org/repos/dist/release/spark/spark-2.0.0-preview/spark-2.0.0-preview-bin-hadoop2.7.tgz
-wget --quiet  https://dist.apache.org/repos/dist/release/spark/spark-2.1.0/spark-2.1.0-bin-hadoop2.7.tgz
-wget --quiet  https://archive.apache.org/dist/spark/spark-2.1.0/spark-2.1.0-bin-hadoop2.7.tgz
+wget --quiet  https://apache.claz.org/spark/spark-3.0.1/spark-3.0.1-bin-hadoop3.2.tgz
+
+
 
 export SPARK_HOME=/opt/spark/
 export SPARK=$SPARK_HOME/bin
@@ -19,8 +19,7 @@ sudo /bin/sh -c 'echo SPARK_CONFIG="$SPARK_HOME/conf" >> /etc/environment'
 #sudo mkdir /opt/spark
 sudo mkdir $SPARK_HOME
 
-#sudo  tar -zxvf spark-2.0.0-preview-bin-hadoop2.7.tgz --strip-components 1  -C $SPARK_HOME
-sudo  tar -zxvf spark-2.1.0-bin-hadoop2.7.tgz  --strip-components 1  -C $SPARK_HOME
+sudo tar xvf spark-3.0.1-bin-hadoop3.2.tgz   --strip-components 1  -C $SPARK_HOME
 
 ####################################################
 ############# user settings

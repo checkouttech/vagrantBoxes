@@ -2,10 +2,11 @@
 ###  Install log stash 
 ############################################
 
-export LOGSTASH_PACKAGE=logstash-6.2.4.tar.gz
+export LOGSTASH_PACKAGE=logstash-7.0.1.tar.gz
 
 # download logstash 
 wget --quiet https://artifacts.elastic.co/downloads/logstash/$LOGSTASH_PACKAGE
+
 
 export LOGSTASH_HOME=/opt/logstash/
 sudo mkdir $LOGSTASH_HOME
