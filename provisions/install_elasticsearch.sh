@@ -3,12 +3,10 @@
 ############################################
 
 #export ES_PACKAGE=elasticsearch-6.2.4.tar.gz
-export ES_PACKAGE=elasticsearch-7.0.1-linux-x86_64.tar.gz
+export ES_PACKAGE=elasticsearch-7.9.2-linux-x86_64.tar.gz
 
 # download es 
-#wget --quiet https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.2.4.tar.gz
 wget --quiet https://artifacts.elastic.co/downloads/elasticsearch/$ES_PACKAGE
-#wget --quiet --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/$JDK_PACKAGE"
 
 export ES_HOME=/opt/elasticsearch/
 sudo mkdir $ES_HOME

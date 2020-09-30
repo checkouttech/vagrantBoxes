@@ -8,12 +8,16 @@ wget --quiet  https://apache.claz.org/spark/spark-3.0.1/spark-3.0.1-bin-hadoop3.
 export SPARK_HOME=/opt/spark/
 export SPARK=$SPARK_HOME/bin
 export SPARK_CONFIG=$SPARK_HOME/conf
+export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.9-src.zip:$PYTHONPATH
+export PATH=$SPARK_HOME/python:$PATH
 
 
 #write to environment file for all future sessions
 sudo /bin/sh -c 'echo SPARK_HOME="/opt/spark/" >> /etc/environment'
 sudo /bin/sh -c 'echo SPARK="$SPARK_HOME/bin" >> /etc/environment'
 sudo /bin/sh -c 'echo SPARK_CONFIG="$SPARK_HOME/conf" >> /etc/environment'
+sudo /bin/sh -c 'echo PYTHONPATH="$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.9-src.zip:$PYTHONPATH" >> /etc/environment'
+sudo /bin/sh -c 'echo PATH="$SPARK_HOME/python:$PATH"  >> /etc/environment'
 
 
 #sudo mkdir /opt/spark

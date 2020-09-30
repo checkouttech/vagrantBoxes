@@ -3,7 +3,7 @@
 ############################################
 
 #export KIBANA_PACKAGE=kibana-6.2.4-linux-x86_64.tar.gz
-export KIBANA_PACKAGE=kibana-7.0.1-linux-x86_64.tar.gz
+export KIBANA_PACKAGE=kibana-7.9.2-linux-x86_64.tar.gz
 
 # download kibana 
 wget --quiet https://artifacts.elastic.co/downloads/kibana/$KIBANA_PACKAGE
@@ -21,9 +21,9 @@ sudo chmod 755 -R $KIBANA_HOME
 sudo /bin/sh -c 'echo "server.host: 0.0.0.0" >> /opt/kibana/config/kibana.yml'
 
 # declare elasticsearch url 
-sudo /bin/sh -c 'echo "elasticsearch.url: http://192.168.150.150:9200" >> /opt/kibana/config/kibana.yml'
-# not sure , may need to delete
-sudo /bin/sh -c 'echo "elasticsearch.hosts: [\"http://localhost:9200\"] >> /opt/kibana/config/kibana.yml'
+sudo /bin/sh -c 'echo "elasticsearch.hosts: [\"http://192.168.150.150:9200\"] >> /opt/kibana/config/kibana.yml'
+#sudo /bin/sh -c 'echo "elasticsearch.url: http://192.168.150.150:9200" >> /opt/kibana/config/kibana.yml'
+
 
 # set max zoom level
 sudo /bin/sh -c 'echo "map.tilemap.options.maxZoom: 18" >> /opt/kibana/config/kibana.yml'

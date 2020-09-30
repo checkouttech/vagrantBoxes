@@ -2,7 +2,7 @@
 ###  Install log stash 
 ############################################
 
-export LOGSTASH_PACKAGE=logstash-7.0.1.tar.gz
+export LOGSTASH_PACKAGE=logstash-7.9.2.tar.gz
 
 # download logstash 
 wget --quiet https://artifacts.elastic.co/downloads/logstash/$LOGSTASH_PACKAGE
@@ -34,3 +34,5 @@ sudo /bin/sh -c 'echo LOGSTASH_HOME="/opt/logstash/" >> /etc/environment'
 sudo /bin/sh -c '.  /etc/environment ; echo PATH="$LOGSTASH_HOME/bin:$PATH" >> /etc/environment'
 
 
+
+ /opt/logstash/bin/logstash -e 'input { stdin { } } output { stdout {} }'
